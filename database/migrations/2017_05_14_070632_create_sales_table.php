@@ -17,6 +17,7 @@ class CreateSalesTable extends Migration
             $table->increments('id');
             $table->integer('item_id')->unsigned()->index();
             $table->integer('order_id')->unsigned()->index();
+            $table->integer('qty')->unsigned()->default(1);
             $table->text('description');
             $table->float('price_dollars')->unsigned();
             $table->timestamps();

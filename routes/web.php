@@ -32,11 +32,12 @@ Route::post('/search', 'ItemsController@search')->name('items.post.search');
 
 // Users
 Auth::routes();
-Route::get('/account', 'UsersController@account')->name('account');
+Route::get('/account', 'UsersController@account')->name('account')->middleware('auth');
 
 // Orders
-Route::get('/my-orders', 'OrdersController@index')->name('myorders');
+Route::get('/my-orders', 'OrdersController@index')->name('myorders')->middleware('auth');
 Route::get('/checkout', 'OrdersController@create')->name('checkout');
+Route::post('/checkout', 'OrdersController@store')->name('orders.store');
 
 // Cart
 Route::get('/carts/add/{item}/{qty?}', 'CartsController@add')->name('carts.add');

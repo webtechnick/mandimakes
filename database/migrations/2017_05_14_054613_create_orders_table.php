@@ -18,8 +18,9 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->integer('billing_address_id')->index()->unsigned();
             $table->integer('shipping_address_id')->index()->unsigned();
-            $table->string('phone',20);
+            $table->string('phone',20)->nullable();
             $table->string('email');
+            $table->string('stripeToken')->nullable();
             $table->tinyInteger('is_new')->index()->unsigned()->default(1); // 1 = new, 0 = seen
             $table->text('special_request')->nullable();
             $table->float('shipping_price_dollars')->unsigned()->default(0);

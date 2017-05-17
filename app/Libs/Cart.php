@@ -11,15 +11,12 @@ class Cart
 {
     public $items = [];
 
-    private $request = null;
-
     /**
      * Use the request object to talk to the session
      * @param Request $request [description]
      */
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->request = $request;
         $this->items = collect($this->getFromSource());
     }
 
@@ -122,7 +119,10 @@ class Cart
      */
     public function getFromSession()
     {
-        return $this->request->session()->get('cart') ?: [];
+        if (session()) {
+            return session()->get('cart');
+        }
+        return [];
     }
 
     /**
@@ -133,7 +133,7 @@ class Cart
     public function getCartFromDatabase()
     {
         // TODO
-        return $this->request->session()->get('cart') ?: [];
+        return session()->get('cart') ?: [];
     }
 
     /**
@@ -145,10 +145,48 @@ class Cart
         return $this->items->all();
     }
 
+    /**
+     * Is the current cart empty?
+     * @return boolean [description]
+     */
+    public function isEmpty()
+    {
+        return $this->itemCount() == 0;
+    }
+
+    /**
+     * Create the checkout script
+     */
+    public function checkout()
+    {
+        $key = config('services.stripe.key');
+        $amount = $this->subTotal() * 100;
+        $email = Auth::check() ? Auth::user()->email : '';
+
+        return
+            '<script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="'. $key .'"
+                data-amount="'. $amount .'"
+                data-name="Mandi Makes Shop"
+                data-billing-address="true"
+                data-shipping-address="true"
+                data-zip-code="true"
+                data-email="'. $email .'"
+                data-description="Purchase From Mandi Makes"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto">
+            </script>';
+    }
+
+    /**
+     * Calculate the subtotal of the cart
+     * @return [type] [description]
+     */
     public function subTotal()
     {
         return $this->items->sum(function($cart) {
-            return $cart->item->price_dollars * $cart->qty;
+            return $cart->item->price() * $cart->qty;
         });
     }
 
@@ -158,6 +196,6 @@ class Cart
      */
     protected function save()
     {
-        $this->request->session()->put('cart', $this->get());
+        return session()->put('cart', $this->get());
     }
 }

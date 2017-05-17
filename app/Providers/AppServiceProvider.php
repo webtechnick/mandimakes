@@ -25,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('cart', function($app) {
-            return new \App\Libs\Cart($app->make('request'));
+            // return new \App\Libs\Cart($app->make('request'));
+            return new \App\Libs\Cart();
         });
     }
 }

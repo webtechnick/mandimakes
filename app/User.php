@@ -73,4 +73,17 @@ class User extends Authenticatable
         $this->group = 'user';
         return $this;
     }
+
+    /**
+     * Create a new user from stripe data
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
+    public static function createFromStripe($data)
+    {
+        $user = new self($data);
+        $user->password = bcrypt('secret');
+        $user->save();
+        return $user;
+    }
 }

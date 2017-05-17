@@ -2,9 +2,11 @@
     <tr>
         <th>Item</th><th>Description</th><th>Quantity</th><th>Price</th><th>Actions</th>
     </tr>
-    @foreach (Cart::get() as $cart)
+    @foreach (Cart::get() as $key => $cart)
     <tr>
-        <td class="text-center">pic</td>
+        <td class="text-center">
+            pic
+        </td>
         <td>{{ $cart->item->short_description }}</td>
         <td class="text-center">{{ $cart->qty }}</td>
         <td class="text-center">{{ $cart->item->formattedPrice() }}</td>

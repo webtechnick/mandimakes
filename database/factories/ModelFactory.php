@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(\App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -24,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Item::class, function (Faker\Generator $faker) {
+$factory->define(\App\Item::class, function (Faker\Generator $faker) {
     $text = implode("\n\n",$faker->paragraphs(2));
     return [
         'title' => $faker->sentence,
@@ -38,7 +38,7 @@ $factory->define(App\Item::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Address::class, function (Faker\Generator $faker) {
+$factory->define(\App\Address::class, function (Faker\Generator $faker) {
     return [
         'name_line' => $faker->name,
         'street' => $faker->streetAddress,
@@ -50,7 +50,7 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+$factory->define(\App\Tag::class, function (Faker\Generator $faker) {
     $word = ucwords($faker->word);
     return [
         'name' => $word,
@@ -58,7 +58,7 @@ $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Order::class, function (Faker\Generator $faker) {
+$factory->define(\App\Order::class, function (Faker\Generator $faker) {
     $shipping_dollars = $faker->randomFloat(2, '2', '10');
     $tax_dollars = $faker->randomFloat(2, '0', '2');
     $discount_dollars = 0;
@@ -81,12 +81,29 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Sale::class, function (Faker\Generator $faker) {
+$factory->define(\App\Sale::class, function (Faker\Generator $faker) {
     $price_dollars = $faker->randomFloat(2, '5', '500');
     return [
         'item_id' => 1,
         'order_id' => 1,
         'price_dollars' => $price_dollars,
+        'qty' => 1,
         'description' => $faker->paragraph
+    ];
+});
+
+$factory->define(\App\ShippingType::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(\App\Shipping::class, function (Faker\Generator $faker) {
+    $shipping_dollars = $faker->randomFloat(2, '2', '10');
+    return [
+        'shipping_type_id' => 1,
+        'name' => $faker->sentence,
+        'price_dollars' => $shipping_dollars,
+        'is_active' => 1,
     ];
 });
