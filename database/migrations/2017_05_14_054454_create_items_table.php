@@ -16,6 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            // $table->string('slug')->unique();
             $table->text('description');
             $table->text('short_description')->nullable();
             $table->tinyInteger('status')->unsigned()->index()->default(1); // 0 = unavailable, 1 = available, 2 = sold

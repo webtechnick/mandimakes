@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Facades\Cart;
 use App\Item;
+use App\Traits\Flashes;
 use Illuminate\Http\Request;
 
 class CartsController extends Controller
 {
+    use Flashes;
     /**
      * Add an item to the cart
      * @param Item    $item [description]
@@ -16,6 +18,7 @@ class CartsController extends Controller
     public function add(Item $item, $qty = 1)
     {
         Cart::addToCart($item, $qty);
+        $this->goodFlash('Item added to cart.');
         return redirect()->route('checkout');
     }
 
@@ -25,9 +28,13 @@ class CartsController extends Controller
      * @param  [type] $qty  [description]
      * @return [type]       [description]
      */
-    public function changeQty(Item $item, $qty)
+    public function change(Item $item, $qty = 1)
     {
+        if (request()->input('qty')) {
+            $qty = request()->input('qty');
+        }
         Cart::change($item, $qty);
+        $this->goodFlash('Item updated in cart.');
         return redirect()->route('checkout');
     }
 
@@ -38,6 +45,7 @@ class CartsController extends Controller
     public function clear()
     {
         Cart::clear();
+        $this->goodFlash('Cart cleared.');
         return redirect()->route('items');
     }
 
@@ -49,6 +57,7 @@ class CartsController extends Controller
     public function remove(Item $item)
     {
         Cart::remove($item);
+        $this->goodFlash('Item removed from cart.');
         return redirect()->route('checkout');
     }
 }

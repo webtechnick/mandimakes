@@ -60,7 +60,7 @@
                 <div class="input-group">
                     <input type="text" name="term" class="form-control" id="topsearch" placeholder="Search">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>
                 </div>
             </form>

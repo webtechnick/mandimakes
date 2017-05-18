@@ -75,6 +75,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Save the stripe ID to the user.
+     * @param  [type] $stripe_id [description]
+     * @return [type]            [description]
+     */
+    public function saveStripeId($stripe_id)
+    {
+        $this->stripe_id = $stripe_id;
+        $this->save();
+        return $this;
+    }
+
+    /**
      * Create a new user from stripe data
      * @param  [type] $data [description]
      * @return [type]       [description]

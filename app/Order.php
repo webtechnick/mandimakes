@@ -104,6 +104,8 @@ class Order extends Model
         if (!$user) {
             // User not found, create user.
             $user = User::createFromStripe(['name' => $name, 'email' => $email]);
+            // Login the user
+            Auth::login($user);
         }
 
         $this->user()->associate($user);
@@ -155,17 +157,50 @@ class Order extends Model
         $order->sales()->createMany(Sale::buildSalesFromCart());
 
         // Calculate the total_dollars
-        $order->calcuateTotalDollars();
+        $order->calcuateTotalDollars()->save();
 
         return $order;
     }
 
     /**
-     * Charge the order
+     * Charge the order to stripe
      * @return [type] [description]
      */
     public function charge()
     {
+        $key = config('services.stripe.secret');
+        \Stripe\Stripe::setApiKey($key);
 
+        // Figure out the stripe ID, if we have one already
+        // Or if we need to create a new customer
+        $stripe_id = null;
+        if (Auth::check() && Auth::user()->stripe_id) {
+            $stripe_id = Auth::user()->stripe_id;
+        } else {
+            // Create a Customer:
+            $customer = \Stripe\Customer::create([
+                "email" => $this->email,
+                "source" => $this->stripeToken,
+            ]);
+
+            $stripe_id = $customer->id;
+        }
+
+        // Store stripe customer into users table.
+        if (Auth::check()) {
+            Auth::user()->saveStripeId($stripe_id);
+        }
+
+        // Actually charge the card.
+        $charge = \Stripe\Charge::create([
+            "amount" => $this->total_dollars * 100,
+            "currency" => "usd",
+            "customer" => $stripe_id,
+            "metadata" => [
+                "order_id" => $this->id,
+            ]
+        ]);
+
+        dd($charge);
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model
 {
+    protected $fillable = ['user_id', 'item_id'];
+
     /**
      * A cart item belongs to an item
      * @return [type] [description]

@@ -28,6 +28,7 @@ class Cart
     {
         $cart = new LineItem($item, $qty);
         $this->items[$item->id] = $cart;
+        $item->incrimentCart();
         $this->save();
     }
 
@@ -39,10 +40,8 @@ class Cart
      */
     public function addToCart(Item $item, $qty = 1)
     {
-        foreach ($this->items as $cart) {
-            if ($cart->item->id == $item->id) {
-                return $this->change($item, $cart->qty + $qty);
-            }
+        if (isset($this->items[$item->id])) {
+            return; // Do nothing.
         }
         return $this->add($item, $qty);
     }

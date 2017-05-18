@@ -57,6 +57,18 @@ class Item extends Model
     }
 
     /**
+     * Increment the cart_count
+     * @return [type] [description]
+     */
+    public function incrimentCart()
+    {
+        $this->cart_count++;
+        $this->save();
+        // TODO save a CartItem if logged in user.
+        return $this;
+    }
+
+    /**
      * Price of item, formatted.
      * @return [type] [description]
      */

@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
+    @include('orders._cart')
     <form action="/checkout" method="POST">
-        @include('orders._cart')
-
         {{ csrf_field() }}
         <div class="form-group">
             <label for="shipping_id">Select Shipping: </label>
@@ -18,7 +17,7 @@
         </div>
         <div class="form-group">
             <label for="special_request">Special Request: </label>
-            <textarea class="form-control" name="special_request" id="special_request" rows="10">{{ old('special_request') }}</textarea>
+            <textarea class="form-control" rows="4" name="special_request" id="special_request" rows="10">{{ old('special_request') }}</textarea>
         </div>
         <div class="pull-right">
             {!! Cart::checkout() !!}

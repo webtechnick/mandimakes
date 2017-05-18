@@ -31,10 +31,6 @@ class Address extends Model
         return $address;
     }
 
-    public function findByStripe($data)
-    {
-    }
-
     /**
      * Map stripe fields to internal data fields
      * @param  [type] $data [description]

@@ -42,7 +42,6 @@ class ItemsController extends Controller
      */
     public function show(Item $item)
     {
-        Cart::add($item);
         return view('items.show', compact('item'));
     }
 }

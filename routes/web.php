@@ -42,5 +42,6 @@ Route::post('/checkout', 'OrdersController@store')->name('orders.store');
 // Cart
 Route::get('/carts/add/{item}/{qty?}', 'CartsController@add')->name('carts.add');
 Route::get('/carts/change/{item}/{qty}', 'CartsController@change')->name('carts.change');
+Route::post('/carts/change/{item}', 'CartsController@change')->name('carts.post.change');
 Route::get('/carts/remove/{item}', 'CartsController@remove')->name('carts.remove');
 Route::get('/carts/clear', 'CartsController@clear')->name('carts.clear');

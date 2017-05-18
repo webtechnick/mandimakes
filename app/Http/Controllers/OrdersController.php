@@ -19,8 +19,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::myOrders()->get();
-        return view('orders.index');
+        $orders = Order::myOrders()->paginate();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -45,8 +45,15 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $order = Order::createFromStripe($request->all());
+
+        $order->charge();
+
+        // TODO check if charge is good
+
+        // TODO fire off an order charged event to email user
+
+        Cart::clear();
 
         $this->goodFlash('Thank you for your purchase.');
 
