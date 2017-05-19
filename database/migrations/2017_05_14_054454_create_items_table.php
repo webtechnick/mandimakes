@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->tinyInteger('status')->unsigned()->index()->default(1); // 0 = unavailable, 1 = available, 2 = sold
             $table->integer('qty')->unsigned()->index()->default(1);
             $table->tinyInteger('is_featured')->unsigned()->index()->default(0);
+            $table->tinyInteger('is_new')->unsigned()->index()->default(1);
             $table->integer('cart_count')->index()->default(0);
             $table->float('price_dollars')->default(0);
             $table->timestamps();

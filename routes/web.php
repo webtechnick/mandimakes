@@ -26,9 +26,8 @@ Route::group([
 
 // Items
 Route::get('/', 'ItemsController@index')->name('items');
+Route::post('/', 'ItemsController@index')->name('items.post');
 Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
-Route::get('/search/{term}', 'ItemsController@index')->name('items.search');
-Route::post('/search', 'ItemsController@search')->name('items.post.search');
 
 // Users
 Auth::routes();
@@ -45,3 +44,6 @@ Route::get('/carts/change/{item}/{qty}', 'CartsController@change')->name('carts.
 Route::post('/carts/change/{item}', 'CartsController@change')->name('carts.post.change');
 Route::get('/carts/remove/{item}', 'CartsController@remove')->name('carts.remove');
 Route::get('/carts/clear', 'CartsController@clear')->name('carts.clear');
+
+// Pages
+Route::get('/about', 'PagesController@about')->name('about');

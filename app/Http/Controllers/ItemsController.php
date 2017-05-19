@@ -13,25 +13,18 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($searchterm = null)
+    public function index(Request $request)
     {
         $query = Item::latest();
-
-        $items = $query->paginate();
-        return view('items.index', compact('items','searchterm'));
-    }
-
-    /**
-     * Accept a search post.
-     * @return [type] [description]
-     */
-    public function search(Request $request)
-    {
-        if ($term = $request->input('term')) {
-            return $this->index($term);
+        if ($filter = $request->input('q')) {
+            $query->filter($filter);
+        }
+        if ($tags = $request->input('tags')) {
+            $query->byInputTags($tags);
         }
 
-        return redirect('/');
+        $items = $query->paginate();
+        return view('items.index', compact('items','filter'));
     }
 
     /**

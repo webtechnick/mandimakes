@@ -19,15 +19,15 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="/?new=1">New Items</a></li>
+                <li><a href="/?tags=new">New Items</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         Products <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Tag</a></li>
-                        <li><a href="#">Tag</a></li>
-                        <li><a href="#">Tag</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
                     </ul>
                 </li>
                 <li><a href="/about">About Us</a></li>
@@ -50,15 +50,18 @@
                             <li><a href="/my-orders"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> My Orders</a></li>
 
                             <li>@include('layouts._logout')</li>
+                            @if ($user->isAdmin())
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/admin"><span class="glyphicon glyphicon-tasks"></span> Admin</a></li>
+                            @endif
                         </ul>
                     </li>
                 @endif
             </ul>
 
-            <form action="/search" method="POST" class="navbar-form navbar-right">
-                {{ csrf_field() }}
+            <form action="/" method="GET" class="navbar-form navbar-right">
                 <div class="input-group">
-                    <input type="text" name="term" class="form-control" id="topsearch" placeholder="Search">
+                    <input type="text" name="q" class="form-control" id="topsearch" placeholder="Search">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>

@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
 
-        @if($searchterm)
-            <h2>Searching for: "{{ $searchterm }}"</h2>
+        @if($filter)
+            <h2>Searching for: "{{ $filter }}"</h2>
         @endif
 
         <div class="text-center">
