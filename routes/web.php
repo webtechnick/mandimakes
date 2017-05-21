@@ -26,6 +26,7 @@ Route::group([
     Route::get('/items/edit/{item}', 'AdminItemsController@edit')->name('items.edit');
     Route::patch('/items/edit/{item}', 'AdminItemsController@update')->name('items.update');
     Route::get('/items/{item}/photos', 'AdminPhotosController@index')->name('photos.index');
+    Route::post('/items/{item}/photos', 'AdminPhotosController@store')->name('photos.store');
     Route::get('/items/delete/{item}', 'AdminItemsController@destroy')->name('items.delete');
 
     Route::get('/tags', 'AdminTagsController@index')->name('tags');

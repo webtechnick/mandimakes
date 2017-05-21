@@ -9,6 +9,8 @@ require('./bootstrap');
 
 require('./modules/confirm');
 
+window.Dropzone = require('dropzone');
+
 // window.Vue = require('vue');
 
 /**
