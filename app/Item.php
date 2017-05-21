@@ -3,6 +3,7 @@
 namespace App;
 
 use App\CartItem;
+use App\Events\ItemSaving;
 use App\Order;
 use App\Photo;
 use App\Sale;
@@ -14,12 +15,42 @@ class Item extends Model
 {
     use Filterable;
 
+    public $fillable = ['title', 'description', 'title', 'price_dollars','qty','short_description','status'];
+
+    public static $statuses = [
+        '1' => 'Available',
+        '0' => 'Unavailable',
+        '2' => 'Sold',
+    ];
+
+    /**
+     * Saving the
+     * @var [type]
+     */
+    public $events = [
+        'saving' => ItemSaving::class
+    ];
+
+    /**
+     * Searchable filters
+     * @return [type] [description]
+     */
     protected function getFilters()
     {
         return [
             'title','description'
         ];
     }
+
+    /**
+     * Get the nice status name
+     * @return [type] [description]
+     */
+    public function statusNice()
+    {
+        return self::$statuses[$this->status];
+    }
+
     /**
      * An item has many sales
      * @return [type] [description]
@@ -104,6 +135,15 @@ class Item extends Model
     }
 
     /**
+     * Add Photo to Item.
+     * @param Photo $photo [description]
+     */
+    public function addPhoto(Photo $photo)
+    {
+        return $this->photos()->save($photo);
+    }
+
+    /**
      * Increment the cart_count
      * @return [type] [description]
      */
@@ -156,6 +196,16 @@ class Item extends Model
         return $query;
     }
 
+    public function url()
+    {
+        return '/item/' . $this->id;
+    }
+
+    public function adminUrl()
+    {
+        return '/admin/items/edit/' . $this->id;
+    }
+
     /**
      * Price of item, formatted.
      * @return [type] [description]
@@ -173,5 +223,17 @@ class Item extends Model
     public function price()
     {
         return $this->price_dollars;
+    }
+
+    /**
+     * Generate the short description from the description
+     * @return [type] [description]
+     */
+    public function generateShortDescription()
+    {
+        if (!$this->short_description && !empty($this->description)) {
+            $this->short_description = str_limit($this->description, 100);
+        }
+        return $this;
     }
 }

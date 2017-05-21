@@ -57,4 +57,17 @@ class ItemTest extends TestCase
         $items = Item::byTags(['tag', 'tag2', 'tag3'])->get();
         $this->assertCount(2, $items); // should get two
     }
+
+    /** @test */
+    public function it_should_fill_in_short_description()
+    {
+        $item = new Item([
+            'title' => 'Some Title',
+            'description' => 'This is a description'
+        ]);
+
+        $item->save();
+
+        $this->assertEquals($item->short_description, $item->description);
+    }
 }

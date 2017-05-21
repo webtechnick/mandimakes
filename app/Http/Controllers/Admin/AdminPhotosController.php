@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AdminOrdersController extends Controller
+class AdminPhotosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class AdminOrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::latest()->paginate();
-        return view('admin.orders.index',compact('orders'));
+        //
     }
 
     /**

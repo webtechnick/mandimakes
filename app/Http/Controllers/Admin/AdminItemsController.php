@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ItemRequest;
+use App\Item;
+use App\Traits\Flashes;
+use Illuminate\Http\Request;
 
 class AdminItemsController extends Controller
 {
+    use Flashes;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        dd('i got here');
+        $query = Item::latest();
+        if ($filter = $request->input('q')) {
+            $query->filter($filter);
+        }
+        $items = $query->paginate();
+
+        return view('admin.items.index', compact('items','filter'));
     }
 
     /**
@@ -24,7 +35,7 @@ class AdminItemsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.items.create');
     }
 
     /**
@@ -33,20 +44,12 @@ class AdminItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        //
-    }
+        $item = Item::create($request->all());
+        $this->goodFlash('Item created');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('admin.items.edit')->with('item', $item);
     }
 
     /**
@@ -55,9 +58,9 @@ class AdminItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Item $item)
     {
-        //
+        return view('admin.items.edit', compact('item'));
     }
 
     /**
@@ -67,9 +70,12 @@ class AdminItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, Item $item)
     {
-        //
+        $item->fill($request->all())->save();
+
+        $this->goodFlash('Item Updated');
+        return redirect()->route('admin.items');
     }
 
     /**
@@ -78,8 +84,12 @@ class AdminItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        $this->goodFlash('Item deleted.');
+
+        return redirect()->route('admin.items');
     }
 }

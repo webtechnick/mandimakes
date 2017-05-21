@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
             // return new \App\Libs\Cart($app->make('request'));
             return new \App\Libs\Cart();
         });
+
+        $this->app->bind('mms', function($app) {
+            return new \App\Libs\MMS();
+        });
     }
 }

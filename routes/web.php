@@ -19,9 +19,18 @@ Route::group([
     'namespace' => 'Admin',
 ], function() {
     Route::get('/', 'AdminOrdersController@index')->name('orders');
+
     Route::get('/items', 'AdminItemsController@index')->name('items');
+    Route::post('/items', 'AdminItemsController@store')->name('items.store');
+    Route::get('/items/create', 'AdminItemsController@create')->name('items.create');
+    Route::get('/items/edit/{item}', 'AdminItemsController@edit')->name('items.edit');
+    Route::patch('/items/edit/{item}', 'AdminItemsController@update')->name('items.update');
+    Route::get('/items/{item}/photos', 'AdminPhotosController@index')->name('photos.index');
+    Route::get('/items/delete/{item}', 'AdminItemsController@destroy')->name('items.delete');
+
     Route::get('/tags', 'AdminTagsController@index')->name('tags');
     Route::get('/users', 'AdminUsersController@index')->name('users');
+    Route::get('/shippings', 'AdminShippingsController@index')->name('users');
 });
 
 // Items
