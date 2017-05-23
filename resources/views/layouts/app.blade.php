@@ -11,6 +11,7 @@
     <title>Mandi Makes Shop</title>
 
     <!-- Styles -->
+    <link href="{{ asset('css/libs.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
@@ -25,6 +26,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- <script src="{{ asset('js/libs.js') }}"></script> -->
     @yield('scripts')
 </body>
 </html>

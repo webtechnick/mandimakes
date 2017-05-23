@@ -15,3 +15,31 @@ form.bluedashed {
     border-style: dashed;
     border-color: #00ADFF;
 }
+.glyphicon-lg {
+    font-size: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.photo-bucket {
+    .admin-box {
+        display: none;
+        position: absolute;
+        top: -10px;
+        left: 5px;
+        z-index: 1000;
+    }
+    &:hover .admin-box {
+        display: block;
+    }
+
+    img.disabled {
+        opacity: 0.4;
+    }
+}

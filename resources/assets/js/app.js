@@ -9,7 +9,10 @@ require('./bootstrap');
 
 require('./modules/confirm');
 
+require('lightbox2');
+
 window.Dropzone = require('dropzone');
+
 
 // window.Vue = require('vue');
 

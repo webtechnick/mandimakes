@@ -43,15 +43,6 @@ class Item extends Model
     }
 
     /**
-     * Get the nice status name
-     * @return [type] [description]
-     */
-    public function statusNice()
-    {
-        return self::$statuses[$this->status];
-    }
-
-    /**
      * An item has many sales
      * @return [type] [description]
      */
@@ -85,6 +76,15 @@ class Item extends Model
     public function photos()
     {
         return $this->hasMany(Photo::class);
+    }
+
+    /**
+     * Get the primary photo for the item.
+     * @return [type] [description]
+     */
+    public function primaryPhoto()
+    {
+        return $this->hasOne(Photo::class)->primary();
     }
 
     /**
@@ -141,6 +141,76 @@ class Item extends Model
     public function addPhoto(Photo $photo)
     {
         return $this->photos()->save($photo);
+    }
+
+    /**
+     * Boolean if item is instock
+     * @return [type] [description]
+     */
+    public function inStock()
+    {
+        return ($this->isStatus('available') && $this->qty > 0);
+    }
+
+    /**
+     * Shortcut wrapper for isStatus
+     * @return boolean [description]
+     */
+    public function isAvailalbe()
+    {
+        return $this->isStatus('available');
+    }
+
+    /**
+     * shortcut for available.
+     * @param  [type]  $status [description]
+     * @return boolean         [description]
+     */
+    public function isStatus($status)
+    {
+        return ($this->statusNice() == $this->formatStatus($status));
+    }
+
+    /**
+     * Set the status on the item
+     * @param [type] $status [description]
+     */
+    public function setStatus($status)
+    {
+        $statusId = $this->getStatusId($status);
+        if ($statusId !== false) {
+            $this->status = $statusId;
+        }
+        return $this;
+    }
+
+    /**
+     * Format the incoming status to match statusNice
+     * @param  [type] $status [description]
+     * @return [type]         [description]
+     */
+    public function formatStatus($status)
+    {
+        return ucwords($status);
+    }
+
+    /**
+     * Find the key of the incoming status string
+     * @param  [type] $status [description]
+     * @return [type]         [description]
+     */
+    public function getStatusId($status)
+    {
+        return array_search($this->formatStatus($status), self::$statuses);
+    }
+
+    /**
+     * Get the nice status name
+     * @return [type] [description]
+     */
+    public function statusNice()
+    {
+        return self::$statuses[$this->status];
     }
 
     /**

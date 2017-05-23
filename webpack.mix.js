@@ -11,8 +11,17 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
-mix.styles(['resources/assets/libs/css/dropzone.css'], 'public/css/libs.css');
+mix.js('resources/assets/js/app.js', 'public/js');
+mix.sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.styles([
+    'node_modules/lightbox2/dist/css/lightbox.css',
+    'node_modules/dropzone/dist/dropzone.css',
+], 'public/css/libs.css');
+
+// mix.scripts([
+//     'node_modules/lightbox2/dist/js/lightbox.js'
+// ], 'public/js/libs.js');
 
 mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/fonts/bootstrap');
+mix.copy('node_modules/lightbox2/dist/images/', 'public/images');

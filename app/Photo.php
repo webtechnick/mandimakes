@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\PhotoDeleting;
+use App\Events\PhotoSaving;
 use App\Item;
 use App\Libs\Thumbnail;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +12,11 @@ use Illuminate\Http\UploadedFile;
 class Photo extends Model
 {
     protected $fillable = ['name', 'thumbnail_path', 'path'];
+
+    protected $events = [
+        'saving' => PhotoSaving::class,
+        'deleting' => PhotoDeleting::class,
+    ];
 
     /**
      * A photo belongs to an item.
@@ -81,5 +88,44 @@ class Photo extends Model
     public function baseDir()
     {
         return 'uploads/photos/';
+    }
+
+    /**
+     * Scope for primary photo
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopePrimary($query)
+    {
+        return $query->where('is_primary', 1);
+    }
+
+    /**
+     * Check if photo is the primary photo
+     * @return boolean [description]
+     */
+    public function isPrimary()
+    {
+        return $this->is_primary == 1;
+    }
+
+    /**
+     * Clear all primary photos from the associated item
+     * @return [type] [description]
+     */
+    public function clearPrimary()
+    {
+        return self::where('item_id', $this->item_id)->primary()->update(['is_primary' => 0]);
+    }
+
+    /**
+     * make this photo the primary photo
+     * @return [type] [description]
+     */
+    public function makePrimary()
+    {
+        $this->clearPrimary();
+        $this->is_primary = 1;
+        return $this;
     }
 }

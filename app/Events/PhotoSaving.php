@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Item;
+use App\Photo;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ItemSaving
+class PhotoSaving
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $item = null;
+    public $photo = null;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Item $item)
+    public function __construct(Photo $photo)
     {
-        $this->item = $item;
+        $this->photo = $photo;
     }
 
     /**

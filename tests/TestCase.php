@@ -44,4 +44,34 @@ abstract class TestCase extends BaseTestCase
         Cart::addToCart($item);
         Cart::addToCart($item2, 2);
     }
+
+    /**
+     * Make a factory model
+     * @param  [type]  $model    [description]
+     * @param  array   $defaults [description]
+     * @param  integer $count    [description]
+     * @return [type]            [description]
+     */
+    public function make($model, $defaults = [], $count = 1)
+    {
+        if ($count > 1) {
+            return factory($model, $count)->make($defaults);
+        }
+        return factory($model)->make($defaults);
+    }
+
+    /**
+     * Create a factory model
+     * @param  [type]  $model    [description]
+     * @param  array   $defaults [description]
+     * @param  integer $count    [description]
+     * @return [type]            [description]
+     */
+    public function create($model, $defaults = [], $count = 1)
+    {
+        if ($count > 1) {
+            return factory($model, $count)->create($defaults);
+        }
+        return factory($model)->create($defaults);
+    }
 }

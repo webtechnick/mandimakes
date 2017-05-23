@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 
-@section('styles')
-<link href="{{ asset('css/libs.css') }}" rel="stylesheet">
-@endsection
-
 @section('panel')
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -23,6 +19,8 @@
 
             <h2>Photos</h2>
 
+            @include('items.photos', ['item' => $item])
+
             <form id="addPhotosForm" action="/admin/items/{{ $item->id }}/photos" method="POST" class="bluedashed dropzone">
                 {{ csrf_field() }}
             </form>
@@ -32,7 +30,7 @@
                     Dropzone.options.addPhotosForm = {
                         init: function () {
                             this.on("queuecomplete", function(file) {
-                                // location.reload();
+                                location.reload();
                             });
                         },
                         paramName: 'photo',

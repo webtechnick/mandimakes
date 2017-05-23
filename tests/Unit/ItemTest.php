@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Item;
+use App\Photo;
 use App\Tag;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -69,5 +70,39 @@ class ItemTest extends TestCase
         $item->save();
 
         $this->assertEquals($item->short_description, $item->description);
+    }
+
+    /** @test */
+    public function it_should_have_a_primary_photo()
+    {
+        $item = $this->create(Item::class);
+        $photo = $this->create(Photo::class, ['item_id' => '9']);
+        $photo2 = $this->create(Photo::class, ['item_id' => '9']);
+
+        $this->assertFalse($photo->isPrimary());
+        $this->assertFalse($photo2->isPrimary());
+
+        $item->addPhoto($photo);
+        $item->addPhoto($photo2);
+
+        $this->assertTrue($photo->isPrimary());
+        $this->assertFalse($photo2->isPrimary());
+
+        $this->assertEquals($photo->id, $item->primaryPhoto->id);
+    }
+
+    /** @test */
+    public function it_should_have_statuses()
+    {
+        $item = $this->create(Item::class);
+
+        $this->assertTrue($item->isStatus('available'));
+        $this->assertFalse($item->isStatus('unavailable'));
+
+        $item->setStatus('unavailable');
+
+        $this->assertFalse($item->isStatus('available'));
+        $this->assertTrue($item->isStatus('unavailable'));
+
     }
 }

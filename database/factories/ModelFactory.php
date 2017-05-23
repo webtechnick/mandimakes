@@ -107,3 +107,14 @@ $factory->define(\App\Shipping::class, function (Faker\Generator $faker) {
         'is_active' => 1,
     ];
 });
+
+$factory->define(\App\Photo::class, function (Faker\Generator $faker) {
+    $name = time() . '-' . $faker->word . $faker->fileExtension;
+    return [
+        'item_id' => 1,
+        'is_primary' => 0,
+        'name' => $name,
+        'path' => 'uploads/photos/' . $name,
+        'thumbnail_path' => 'uploads/photos/tn-' . $name
+    ];
+});
