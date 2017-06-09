@@ -7,7 +7,26 @@
 @section('panel')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="row">
+            <div class="level">
+                <h4 class="flex">
+                    Items
+                </h4>
+
+                <div>
+                    <form action="/admin/items" method="GET" class="form-inline">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Item Filter" value="{{ $filter }}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="row">
                 <div class="col-md-9">
                     <h2>Items</h2>
                 </div>
@@ -21,7 +40,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
             <table class="table table-striped">
@@ -34,7 +53,7 @@
                 </tr>
             @foreach($items as $item)
                 <tr>
-                    <td class="text-center">Pic <br> {{ $item->statusNice() }}</td>
+                    <td class="text-center">{!! $item->pic('50'); !!} <br> {{ $item->statusNice() }}</td>
                     <td class="hidden-sm hidden-xs text-left">{{ $item->short_description }}</td>
                     <td class="text-center">{{ $item->qty }}</td>
                     <td class="text-center">{{ $item->formattedPrice() }}</td>

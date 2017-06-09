@@ -11,14 +11,26 @@
             {{ $items->links() }}
         </div>
 
-
-        @foreach($items->chunk(3) as $chunk)
+        @forelse($items->chunk(3) as $chunk)
             <div class="row">
                 @foreach($chunk as $item)
                     @include('items._itemth', ['item' => $item])
                 @endforeach
             </div>
-        @endforeach
+        @empty
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            No Items Found.
+                        </div>
+                        <div class="panel-body">
+                            Please widen your search.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforelse
 
         <div class="text-center">
             {{ $items->links() }}

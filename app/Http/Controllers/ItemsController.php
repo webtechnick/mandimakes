@@ -15,7 +15,7 @@ class ItemsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Item::latest();
+        $query = Item::latest()->available();
         if ($filter = $request->input('q')) {
             $query->filter($filter);
         }

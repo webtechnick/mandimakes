@@ -105,4 +105,33 @@ class ItemTest extends TestCase
         $this->assertTrue($item->isStatus('unavailable'));
 
     }
+
+    /** @test */
+    public function it_shoud_decide_if_it_has_a_primary_photo()
+    {
+        $item = $this->create(Item::class);
+
+        $this->assertFalse($item->hasPrimaryPhoto());
+
+        $photo = $this->create(Photo::class);
+        $item->addPhoto($photo);
+
+        $this->assertTrue($item->hasPrimaryPhoto());
+    }
+
+    /** @test */
+    public function it_should_return_a_url()
+    {
+        $item = $this->create(Item::class);
+
+        $this->assertContains('/item/1', $item->url());
+    }
+
+    /** @test */
+    public function it_should_know_its_admin_url()
+    {
+        $item = $this->create(Item::class);
+
+        $this->assertContains('/admin/items/edit/1', $item->adminUrl());
+    }
 }

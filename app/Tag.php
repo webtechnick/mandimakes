@@ -2,17 +2,28 @@
 
 namespace App;
 
+use App\Events\TagDeleting;
 use App\Item;
+use App\Traits\Filterable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use Sluggable;
+    use Sluggable, Filterable;
 
     protected $fillable = [
         'name', 'slug'
     ];
+
+    protected $events = [
+        'deleting' => TagDeleting::class
+    ];
+
+    protected function getFilters()
+    {
+        return ['name','slug'];
+    }
 
     /**
      * Slug source

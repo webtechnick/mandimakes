@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagRequest;
+use App\Tag;
+use App\Traits\Flashes;
+use Illuminate\Http\Request;
 
 class AdminTagsController extends Controller
 {
+    use Flashes;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Tag::orderBy('name', 'asc');
+        if ($filter = $request->input('q')) {
+            $query->filter($filter);
+        }
+        $tags = $query->paginate();
+
+        return view('admin.tags.index', compact('tags','filter'));
     }
 
     /**
@@ -24,7 +34,7 @@ class AdminTagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -33,20 +43,12 @@ class AdminTagsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        //
-    }
+        $tag = Tag::create($request->all());
+        $this->goodFlash('Tag created');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('admin.tags');
     }
 
     /**
@@ -55,9 +57,9 @@ class AdminTagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -67,9 +69,12 @@ class AdminTagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, Tag $tag)
     {
-        //
+        $tag->fill($request->all())->save();
+
+        $this->goodFlash('Tag Updated');
+        return redirect()->route('admin.tags');
     }
 
     /**
@@ -78,8 +83,11 @@ class AdminTagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        $this->goodFlash('Tag deleted.');
+        return redirect()->route('admin.tags');
     }
 }

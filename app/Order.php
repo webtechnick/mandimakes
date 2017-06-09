@@ -73,6 +73,25 @@ class Order extends Model
     }
 
     /**
+     * New orders scope
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeUnseen($query)
+    {
+        return $query->where('is_new', 1);
+    }
+
+    /**
+     * Unseen order count
+     * @return [type] [description]
+     */
+    public static function unseenCount()
+    {
+        return self::unseen()->count();
+    }
+
+    /**
      * Mark an order as seen.
      * @return [type] [description]
      */

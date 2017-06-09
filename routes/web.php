@@ -18,8 +18,10 @@ Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
 ], function() {
+    // Orders
     Route::get('/', 'AdminOrdersController@index')->name('orders');
 
+    // Items
     Route::get('/items', 'AdminItemsController@index')->name('items');
     Route::post('/items', 'AdminItemsController@store')->name('items.store');
     Route::get('/items/create', 'AdminItemsController@create')->name('items.create');
@@ -32,7 +34,14 @@ Route::group([
     Route::get('/photos/{photo}/delete', 'AdminPhotosController@destroy')->name('photos.delete');
     Route::get('/photos/{photo}/makeprimary', 'AdminPhotosController@makeprimary')->name('photos.primary');
 
+    // Tags
     Route::get('/tags', 'AdminTagsController@index')->name('tags');
+    Route::post('/tags', 'AdminTagsController@store')->name('tags.store');
+    Route::get('/tags/create', 'AdminTagsController@create')->name('tags.create');
+    Route::get('/tags/edit/{tag}', 'AdminTagsController@edit')->name('tags.edit');
+    Route::patch('/tags/edit/{tag}', 'AdminTagsController@update')->name('tags.update');
+    Route::get('/tags/delete/{tag}', 'AdminTagsController@destroy')->name('tags.delete');
+
     Route::get('/users', 'AdminUsersController@index')->name('users');
     Route::get('/shippings', 'AdminShippingsController@index')->name('users');
 });

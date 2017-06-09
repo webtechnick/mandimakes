@@ -9,11 +9,11 @@
     @foreach (Cart::get() as $key => $cart)
     <tr>
         <td class="text-center">
-            pic
+            {!! $cart->item->pic('50') !!}
         </td>
         <td class="hidden-sm hidden-xs">{{ $cart->item->short_description }}</td>
         <td class="text-center">
-            <form action="/carts/change/{{ $cart->item->id }}" method="POST" class="form-inline">
+            <form action="{{ route('carts.post.change', [$cart->item]) }}" method="POST" class="form-inline">
                 {{ csrf_field() }}
                 <div class="input-group">
                     <input type="text" name="qty" value="{{ $cart->qty }}" class="form-control">
@@ -23,7 +23,7 @@
                 </div>
             </form>
         </td>
-        <td class="text-center"><a href="/carts/remove/{{ $cart->item->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td class="text-center"><a href="{{ route('carts.remove', [$cart->item]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
         <td class="text-right">{{ $cart->item->formattedPrice() }}</td>
     </tr>
     @endforeach
