@@ -43,7 +43,7 @@ class Photo extends Model
     }
 
     /**
-     * Mutator, if name changes, also updated path and thumbnail_path
+     * Mutator, if name changes, also updated path
      *
      * @param string name
      */
@@ -77,7 +77,8 @@ class Photo extends Model
      */
     public function baseDir()
     {
-        return 'uploads/photos/';
+        // 'uploads/photos/'
+        return substr(config('filesystems.disks.uploads.url'), 1) . '/';
     }
 
     /**

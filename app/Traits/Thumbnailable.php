@@ -80,7 +80,6 @@ trait Thumbnailable
         return $size ?: config('thumbnail.size');
     }
 
-
     /**
      * Get the filename of the file
      * @return [type] [description]
