@@ -115,6 +115,5 @@ $factory->define(\App\Photo::class, function (Faker\Generator $faker) {
         'is_primary' => 0,
         'name' => $name,
         'path' => 'uploads/photos/' . $name,
-        'thumbnail_path' => 'uploads/photos/tn-' . $name
     ];
 });

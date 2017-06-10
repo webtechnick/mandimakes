@@ -107,7 +107,7 @@ class ItemTest extends TestCase
     }
 
     /** @test */
-    public function it_shoud_decide_if_it_has_a_primary_photo()
+    public function it_should_decide_if_it_has_a_primary_photo()
     {
         $item = $this->create(Item::class);
 
@@ -116,7 +116,7 @@ class ItemTest extends TestCase
         $photo = $this->create(Photo::class);
         $item->addPhoto($photo);
 
-        $this->assertTrue($item->hasPrimaryPhoto());
+        $this->assertTrue($item->fresh()->hasPrimaryPhoto());
     }
 
     /** @test */

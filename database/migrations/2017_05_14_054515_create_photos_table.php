@@ -19,7 +19,6 @@ class CreatePhotosTable extends Migration
             $table->tinyInteger('is_primary')->unsigned()->index()->default(0);
             $table->string('name')->unique();
             $table->string('path');
-            $table->string('thumbnail_path');
             $table->timestamps();
 
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');

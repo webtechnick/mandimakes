@@ -4,7 +4,7 @@
             <div class="hand" onclick="location.href='/item/{{ $item->id }}'">
                 @if ($item->hasPrimaryPhoto())
                     <div class="text-center">
-                        <img class="img-rounded" src="/{{ $item->primaryPhoto->thumbnail_path }}" alt="...">
+                        {!! $item->pic(200) !!}
                     </div>
                 @endif
 

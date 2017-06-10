@@ -6,11 +6,14 @@ use App\Events\PhotoDeleting;
 use App\Events\PhotoSaving;
 use App\Item;
 use App\Libs\Thumbnail;
+use App\Traits\Thumbnailable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
 class Photo extends Model
 {
+    use Thumbnailable;
+
     protected $fillable = ['name', 'thumbnail_path', 'path'];
 
     protected $events = [
@@ -48,38 +51,24 @@ class Photo extends Model
     {
         $this->attributes['name'] = $name;
         $this->path = $this->baseDir() . $name;
-        $this->thumbnail_path = $this->baseDir() . 'tn-' . $name;
-        // $this->tiny_path = $this->baseDir() . 'xs-' . $name;
     }
 
     /**
-     * Constructor building uploaded file
+     * Construct a photo from an uploaded file.
      *
      * @param  UploadedFile $file [description]
-     * @return self
+     * @return [type]             [description]
      */
-    public static function fromFileUpload(UploadedFile $file)
+    public static function fromUploadedFile(UploadedFile $file)
     {
-        // Build the photo
-        $photo = (new static)->saveAs($file->getClientOriginalName());
-        // Move the uploaded file
+        // Start photo
+        $photo = (new self)->saveAs($file->getClientOriginalName());
+        // Move uploaded photo to directory
         $file->move($photo->baseDir(), $photo->name);
-        // Make a thumbnail
-        $photo->makeThumbnail();
+        // Eager create a thumbnail for ourselves
+        $photo->thumbnail(200);
 
         return $photo;
-    }
-
-    /**
-     * Make the thumbnail out of the photo
-     *
-     * @return [type] [description]
-     */
-    public function makeThumbnail($size = 200)
-    {
-        (new Thumbnail($this->path, $this->thumbnail_path, $size))->save();
-
-        return $this;
     }
 
     /**

@@ -205,7 +205,7 @@ class Item extends Model
         if (!$this->hasPrimaryPhoto()) {
             return '';
         }
-        return '<img src="/'. $this->primaryPhoto->thumbnail_path .'" class="img-rounded" width="'. $size .'">';
+        return '<img src="'. $this->primaryPhoto->thumbnail($size) .'" class="img-rounded" width="'. $size .'">';
     }
 
     /**

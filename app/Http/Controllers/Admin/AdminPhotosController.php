@@ -19,7 +19,7 @@ class AdminPhotosController extends Controller
      */
     public function store(Request $request, Item $item)
     {
-        $photo = Photo::fromFileUpload($request->file('photo'));
+        $photo = Photo::fromUploadedFile($request->file('photo'));
         $item->addPhoto($photo);
 
         return 'Done';

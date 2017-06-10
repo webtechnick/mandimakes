@@ -49,7 +49,7 @@ class AdminItemsController extends Controller
         $item = Item::create($request->all());
         $this->goodFlash('Item created');
 
-        return redirect()->route('admin.items.edit')->with('item', $item);
+        return redirect()->route('admin.items.edit', $item)->with(['item' => $item]);
     }
 
     /**

@@ -29,7 +29,7 @@ class RemovePhotoFiles
     {
         $photo = $event->photo;
 
-        File::delete(public_path() . '/' . $photo->path);
-        File::delete(public_path() . '/' . $photo->thumbnail_path);
+        File::delete(public_path($photo->path)); // Original
+        File::delete(File::glob(public_path($photo->baseDir() . '/*x' . $photo->name))); // All thumbnails
     }
 }
