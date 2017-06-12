@@ -17,7 +17,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\ItemGenerateShortDescription',
         ],
         'App\Events\PhotoSaving' => [
-            // 'App\Listeners\UpdateThumbnail',
             'App\Listeners\SelectPrimaryPhoto',
         ],
         'App\Events\PhotoDeleting' => [
@@ -25,6 +24,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\TagDeleting' => [
             'App\Listeners\RemoveTagFromItems',
+        ],
+        'App\Events\OrderSuccess' => [
+            'App\Listeners\SendThankYouNotification',
+        ],
+        'App\Events\OrderShipped' => [
+            'App\Listeners\SendShippmentNotification',
         ],
     ];
 

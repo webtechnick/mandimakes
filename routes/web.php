@@ -20,6 +20,9 @@ Route::group([
 ], function() {
     // Orders
     Route::get('/', 'AdminOrdersController@index')->name('orders');
+    Route::get('/orders/edit/{item}', 'AdminOrdersController@edit')->name('orders.edit');
+    Route::patch('/orders/edit/{item}', 'AdminOrdersController@update')->name('orders.update');
+    Route::get('/orders/delete/{item}', 'AdminOrdersController@destroy')->name('orders.delete');
 
     // Items
     Route::get('/items', 'AdminItemsController@index')->name('items');
@@ -42,8 +45,21 @@ Route::group([
     Route::patch('/tags/edit/{tag}', 'AdminTagsController@update')->name('tags.update');
     Route::get('/tags/delete/{tag}', 'AdminTagsController@destroy')->name('tags.delete');
 
+    // Users
     Route::get('/users', 'AdminUsersController@index')->name('users');
-    Route::get('/shippings', 'AdminShippingsController@index')->name('users');
+    Route::post('/users', 'AdminUsersController@store')->name('users.store');
+    Route::get('/users/create', 'AdminUsersController@create')->name('users.create');
+    Route::get('/users/edit/{user}', 'AdminUsersController@edit')->name('users.edit');
+    Route::patch('/users/edit/{user}', 'AdminUsersController@update')->name('users.update');
+    Route::get('/users/delete/{user}', 'AdminUsersController@destroy')->name('shippings.delete');
+
+    // Shippings
+    Route::get('/shippings', 'AdminShippingsController@index')->name('shippings');
+    Route::post('/shippings', 'AdminShippingsController@store')->name('shippings.store');
+    Route::get('/shippings/create', 'AdminShippingsController@create')->name('shippings.create');
+    Route::get('/shippings/edit/{shipping}', 'AdminShippingsController@edit')->name('shippings.edit');
+    Route::patch('/shippings/edit/{shipping}', 'AdminShippingsController@update')->name('shippings.update');
+    Route::get('/shippings/delete/{shipping}', 'AdminShippingsController@destroy')->name('shippings.delete');
 });
 
 // Items
@@ -54,9 +70,14 @@ Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
 // Users
 Auth::routes();
 Route::get('/account', 'UsersController@account')->name('account')->middleware('auth');
+Route::patch('/account', 'UsersController@update')->name('users.update')->middleware('auth');
+Route::get('/account/password', 'UsersController@password')->name('users.password')->middleware('auth');
+Route::patch('/account/password', 'UsersController@change_password')->name('users.change_password')->middleware('auth');
+
 
 // Orders
 Route::get('/my-orders', 'OrdersController@index')->name('myorders')->middleware('auth');
+Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show')->middleware('auth');
 Route::get('/checkout', 'OrdersController@create')->name('checkout');
 Route::post('/checkout', 'OrdersController@store')->name('orders.store');
 

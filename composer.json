@@ -11,6 +11,7 @@
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
         "stripe/stripe-php": "^4.9"
     },
     "require-dev": {

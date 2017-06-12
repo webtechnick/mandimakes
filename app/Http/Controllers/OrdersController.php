@@ -19,7 +19,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::myOrders()->paginate();
+        $orders = Order::myOrders()->latest()->paginate();
         return view('orders.index', compact('orders'));
     }
 
@@ -66,8 +66,8 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return $order;
     }
 }

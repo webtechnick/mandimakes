@@ -9,12 +9,13 @@ use App\Photo;
 use App\Sale;
 use App\Tag;
 use App\Traits\Filterable;
+use App\Traits\FormattedPrice;
 use App\Traits\Taggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    use Filterable, Taggable;
+    use Filterable, Taggable, FormattedPrice;
 
     public $fillable = ['title', 'description', 'title', 'price_dollars','qty','short_description','status'];
 
@@ -205,17 +206,7 @@ class Item extends Model
         if (!$this->hasPrimaryPhoto()) {
             return '';
         }
-        return '<img src="'. $this->primaryPhoto->thumbnail($size) .'" class="img-rounded" width="'. $size .'">';
-    }
-
-    /**
-     * Price of item, formatted.
-     * @return [type] [description]
-     */
-    public function formattedPrice()
-    {
-        setlocale(LC_MONETARY, 'en_US.UTF-8');
-        return money_format('%.2n', $this->price());
+        return '<img src="'. $this->primaryPhoto->thumbnail($size) .'" class="img-rounded">';
     }
 
     /**

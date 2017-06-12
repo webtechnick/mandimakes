@@ -10,13 +10,14 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function stripeData()
+    public function stripeData($data = [])
     {
-        return $data = [
+        return array_merge([
             "_token" => "7GPBuYfBYD8WdgNtkcWf36bM0rxcG5sITOnNTO1w",
             "shipping_id" => "1",
             "special_request" => null,
-            "stripeToken" => "tok_1AKWUdEZtS6NC025iMJ3XphX",
+            //"stripeToken" => "tok_1AKWUdEZtS6NC025iMJ3XphX",
+            "stripeToken" => "tok_visa",
             "stripeTokenType" => "card",
             "stripeEmail" => "nick@example.com",
             "stripeBillingName" => "Nick Baker",
@@ -33,7 +34,7 @@ abstract class TestCase extends BaseTestCase
             "stripeShippingAddressLine1" => "123 Main Street",
             "stripeShippingAddressCity" => "Los Angeles",
             "stripeShippingAddressState" => "CA",
-        ];
+        ], $data);
     }
 
     public function buildCart()
@@ -73,5 +74,26 @@ abstract class TestCase extends BaseTestCase
             return factory($model, $count)->create($defaults);
         }
         return factory($model)->create($defaults);
+    }
+
+    /**
+     * Sign in a user.
+     * @param  boolean $is_admin [description]
+     * @return [type]            [description]
+     */
+    public function signIn($user = null)
+    {
+        $user = $user ?: $this->create('App\User');
+        $this->actingAs($user);
+        return $user;
+    }
+
+    /**
+     * Sign in an admin user.
+     * @return [type] [description]
+     */
+    public function signInAdmin()
+    {
+        return $this->signIn($this->create('App\User', ['role' => 'admin']));
     }
 }

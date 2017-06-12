@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Shipping;
+use App\Traits\Flashes;
+use Illuminate\Http\Request;
 
-class AdminUsersController extends Controller
+class AdminShippingsController extends Controller
 {
+    use Flashes;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,13 +18,13 @@ class AdminUsersController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::latest();
+        $query = Shipping::latest();
         if ($filter = $request->input('q')) {
             $query->filter($filter);
         }
-        $users = $query->paginate();
+        $shippings = $query->paginate();
 
-        return view('admin.users.index', compact('users','filter'));
+        return view('admin.shippings.index', compact('shippings','filter'));
     }
 
     /**
@@ -30,7 +34,7 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.shippings.create');
     }
 
     /**
@@ -41,18 +45,10 @@ class AdminUsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $shipping = Shipping::create($request->all());
+        $this->goodFlash('Shipping Created');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('admin.shippings');
     }
 
     /**
@@ -61,9 +57,9 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Shipping $shipping)
     {
-        //
+        return view('admin.shippings.edit', compact('shipping'));
     }
 
     /**
@@ -73,9 +69,12 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Shipping $shipping)
     {
-        //
+        $shipping->fill($request->all())->save();
+
+        $this->goodFlash('Shipping Updated');
+        return redirect()->route('admin.shippings');
     }
 
     /**
@@ -84,8 +83,11 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Shipping $shipping)
     {
-        //
+        $shipping->delete();
+
+        $this->goodFlash('Shipping Deleted');
+        return redirect()->route('admin.shippings');
     }
 }

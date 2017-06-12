@@ -17,6 +17,15 @@ class Order extends Model
 
     protected $fillable = ['shipping_id','special_request','email','phone', 'stripeToken'];
 
+    protected $with = ['sales'];
+
+    protected static $statuses = [
+        0 => 'pending',
+        1 => 'success',
+        2 => 'decline',
+        3 => 'error',
+    ];
+
     /**
      * An order belongs to a user
      * @return [type] [description]
@@ -88,7 +97,7 @@ class Order extends Model
      */
     public static function unseenCount()
     {
-        return self::unseen()->count();
+        return self::unseen()->select(['id'])->count();
     }
 
     /**
@@ -181,6 +190,47 @@ class Order extends Model
         return $order;
     }
 
+    public function markOutcome($outcome = null)
+    {
+        if ($outcome) {
+            $this->stripeOutcome = $outcome;
+        }
+        return $this;
+    }
+
+    /**
+     * Mark the order as success.
+     * @return [type] [description]
+     */
+    public function markSuccess($outcome = null)
+    {
+        $this->markOutcome($outcome);
+        $this->status = 1;
+        return $this;
+    }
+
+    /**
+     * Mark the order as declined.
+     * @return [type] [description]
+     */
+    public function markDecline($outcome = null)
+    {
+        $this->markOutcome($outcome);
+        $this->status = 2;
+        return $this;
+    }
+
+    /**
+     * Mark the order as error.
+     * @return [type] [description]
+     */
+    public function markError($outcome = null)
+    {
+        $this->markOutcome($outcome);
+        $this->status = 3;
+        return $this;
+    }
+
     /**
      * Charge the order to stripe
      * @return [type] [description]
@@ -192,7 +242,7 @@ class Order extends Model
 
         // Figure out the stripe ID, if we have one already
         // Or if we need to create a new customer
-        $stripe_id = null;
+        /*$stripe_id = null;
         if (Auth::check() && Auth::user()->stripe_id) {
             $stripe_id = Auth::user()->stripe_id;
         } else {
@@ -209,17 +259,28 @@ class Order extends Model
         if (Auth::check()) {
             Auth::user()->saveStripeId($stripe_id);
         }
-
+        */
         // Actually charge the card.
-        $charge = \Stripe\Charge::create([
-            "amount" => $this->total_dollars * 100,
-            "currency" => "usd",
-            "customer" => $stripe_id,
-            "metadata" => [
-                "order_id" => $this->id,
-            ]
-        ]);
+        try {
+            $charge = \Stripe\Charge::create([
+                "amount" => $this->total_dollars * 100,
+                "currency" => "usd",
+                //"customer" => $stripe_id,
+                "source" => $this->stripeToken,
+                "metadata" => [
+                    "order_id" => $this->id,
+                ]
+            ]);
 
-        dd($charge);
+            $this->markSuccess($charge->outcome->__toJSON());
+        } catch(\Stripe\Error\Card $e) { // Card Declined.
+            $this->markDecline($e->getMessage());
+        } catch (\Stripe\Error\Base $e) { // Card Error
+            $this->markError($e->getMessage());
+        }
+
+        $this->save();
+
+        return $this;
     }
 }
