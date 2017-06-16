@@ -10,7 +10,10 @@ trait FormattedPrice
      */
     public function formattedPrice()
     {
-        return sprintf('U$ %s', number_format($this->price(), 2));
+        if ($this->price() == 0) {
+            return 'Free';
+        }
+        return sprintf('$ %s', number_format($this->price(), 2));
     }
 
     /**

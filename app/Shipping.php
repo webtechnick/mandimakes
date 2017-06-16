@@ -23,9 +23,38 @@ class Shipping extends Model
         return $this->belongsTo(ShippingType::class, 'shipping_type_id');
     }
 
+    /**
+     * Get the filters for a shipping search
+     * @return [type] [description]
+     */
     public function getFilters()
     {
         return ['name'];
+    }
+
+    /**
+     * Get the list of items.
+     * @return [type] [description]
+     */
+    public static function listOptions()
+    {
+        $shippings = self::forList()->get();
+        $retval = [];
+        foreach ($shippings as $shipping) {
+            $retval[$shipping->id] = "{$shipping->type->name} {$shipping->name} ({$shipping->formattedPrice()})";
+        }
+        return $retval;
+    }
+
+    /**
+     * Scope for list
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeForList($query)
+    {
+        return $query->select(['id','shipping_type_id','name','price_dollars'])
+                     ->orderBy('price_dollars', 'ASC');
     }
 
     /**

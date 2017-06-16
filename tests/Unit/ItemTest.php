@@ -134,4 +134,56 @@ class ItemTest extends TestCase
 
         $this->assertContains('/admin/items/edit/1', $item->adminUrl());
     }
+
+    /** @test */
+    public function it_should_sync_tags_by_string_by_creating()
+    {
+        $item = $this->create(Item::class);
+        $this->assertEquals(0, Tag::count());
+
+        $tagString = 'Dragon,Egg,Stuff';
+
+        $item->syncTagString($tagString);
+
+        $this->assertEquals($item->tagString, $tagString);
+        $this->assertCount(3, $item->tags()->get());
+        $this->assertEquals(3, Tag::count());
+    }
+
+    /** @test */
+    public function it_should_sync_tags_by_string_by_finding_tags()
+    {
+        $item = $this->create(Item::class);
+        factory(Tag::class)->create(['name' => 'Dragon']);
+        factory(Tag::class)->create(['name' => 'Egg']);
+        factory(Tag::class)->create(['name' => 'Stuff']);
+        $this->assertEquals(3, Tag::count());
+
+        $tagString = 'Dragon,Egg,Stuff';
+
+        $item->syncTagString($tagString);
+
+        $this->assertEquals($item->tagString, $tagString);
+        $this->assertCount(3, $item->tags()->get());
+        $this->assertEquals(3, Tag::count()); // Didn't create any new tags
+    }
+
+    public function it_should_have_related_items()
+    {
+        $item = factory(Item::class)->create();
+        $item2 = factory(Item::class)->create();
+        $tag = factory(Tag::class)->create(['name' => 'Tag', 'slug' => 'tag']);
+        $tag2 = factory(Tag::class)->create(['name' => 'Tag2', 'slug' => 'tag2']);
+        $tag3 = factory(Tag::class)->create(['name' => 'Tag3', 'slug' => 'tag3']);
+
+        $item->addTag($tag);
+        $item->addTag($tag2);
+        $item2->addTag($tag2);
+        $item2->addTag($tag3);
+
+        $related = $item->related(1); // get me item2
+
+        $this->assertCount(1, $related);
+        $this->assertEquals($related[0]->id, $item2->id);
+    }
 }

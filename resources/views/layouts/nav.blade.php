@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                Mandi Makes Shop
+                <img src="/images/logo-full-sm.png">
             </a>
         </div>
 

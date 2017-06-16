@@ -46,7 +46,7 @@ class AdminItemsController extends Controller
      */
     public function store(ItemRequest $request)
     {
-        $item = Item::create($request->all());
+        $item = Item::createFromRequest($request->all());
         $this->goodFlash('Item created');
 
         return redirect()->route('admin.items.edit', $item)->with(['item' => $item]);

@@ -18,6 +18,8 @@ class CreateItemTagJoinTable extends Migration
             $table->integer('item_id')->unsigned()->index();
             $table->integer('tag_id')->unsigned()->index();
             $table->timestamps();
+
+            $table->unique(['item_id', 'tag_id']);
         });
     }
 

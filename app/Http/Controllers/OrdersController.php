@@ -46,18 +46,16 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $order = Order::createFromStripe($request->all());
-
         $order->charge();
 
-        // TODO check if charge is good
+        if ($order->isGood()) {
+            Cart::clear();
+            $this->goodFlash('Thank you for your purchase.');
+            return redirect()->route('myorders');
+        }
 
-        // TODO fire off an order charged event to email user
-
-        Cart::clear();
-
-        $this->goodFlash('Thank you for your purchase.');
-
-        return redirect()->route('myorders');
+        $this->badFlash('Unable to complete purchase. ' . $order->stripeOutcome);
+        return redirect()->route('checkout');
     }
 
     /**

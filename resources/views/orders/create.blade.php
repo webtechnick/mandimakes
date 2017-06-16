@@ -7,13 +7,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="shipping_id">Select Shipping: </label>
-            <select name="shipping_id" id="shipping_id" class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            {{ Form::select('shipping_id', \App\Shipping::listOptions(), null, ['class' => 'form-control','required']) }}
         </div>
         <div class="form-group">
             <label for="special_request">Special Request: </label>

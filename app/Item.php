@@ -101,6 +101,19 @@ class Item extends Model
     }
 
     /**
+     * [createFromRequest description]
+     * @return [type] [description]
+     */
+    public static function createFromRequest($data)
+    {
+        $item = self::create($data);
+        if (isset($data['tagString'])) {
+            $item->syncTagString($data['tagString']);
+        }
+        return $item;
+    }
+
+    /**
      * Boolean if item is instock
      * @return [type] [description]
      */
@@ -191,11 +204,19 @@ class Item extends Model
         return $this;
     }
 
+    /**
+     * Show URL for item
+     * @return [type] [description]
+     */
     public function url()
     {
         return route('items.show', $this);
     }
 
+    /**
+     * [adminUrl description]
+     * @return [type] [description]
+     */
     public function adminUrl()
     {
         return route('admin.items.edit', $this);
@@ -230,6 +251,25 @@ class Item extends Model
         return $this;
     }
 
+    /**
+     * Get related items
+     * @param  int $count [description]
+     * @return collection of related items
+     */
+    public function related($count = 3)
+    {
+        // Look at $this->tags and build up related items.
+        $tags = $this->tags()->pluck('slug');
+        if ($tags->isEmpty()) {
+            return collect([]);
+        }
+    }
+
+    /**
+     * Available scope
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
     public function scopeAvailable($query)
     {
         return $query->where('status', 1);

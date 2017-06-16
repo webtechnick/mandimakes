@@ -25,13 +25,43 @@ trait Taggable
     }
 
     /**
-     * Find or create tag based on list
+     * Find or create tag based on csv list
      * @param  [type] $mixed [description]
      * @return [type]        [description]
      */
-    public function tag($mixed)
+    public function syncTagString($string)
     {
+        $this->tags()->detach(); // clear tags.
 
+        $tags = explode(',', $string);
+        foreach($tags as $name) {
+            $name = trim($name);
+            $tag = Tag::where('name', $name)->orWhere('slug', $name)->first();
+            if (!$tag) {
+                $tag = Tag::create(['name' => $name]);
+            }
+            $this->addTag($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the tagString will associate tags to the item, creating what we need
+     * @param [type] $value [description]
+     */
+    public function setTagStringAttribute($value)
+    {
+        return $this->syncTagString($value);
+    }
+
+    /**
+     * tagString as CSV
+     * @return [type] [description]
+     */
+    public function getTagStringAttribute()
+    {
+        return $this->tags()->pluck('name')->implode(',');
     }
 
     /**

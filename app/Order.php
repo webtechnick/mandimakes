@@ -283,4 +283,13 @@ class Order extends Model
 
         return $this;
     }
+
+    /**
+     * Return if order is good.
+     * @return boolean [description]
+     */
+    public function isGood()
+    {
+        return $this->status == 1;
+    }
 }

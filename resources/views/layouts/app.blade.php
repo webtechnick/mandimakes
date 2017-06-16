@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="stripe-key" content="{{ config('services.stripe.key') }}">
 
     <title>Mandi Makes Shop</title>
 
@@ -16,7 +17,7 @@
     @yield('styles')
 </head>
 <body>
-    <div>
+    <div id="app">
         @include('layouts.nav')
 
         @include('layouts.flashes')

@@ -94,6 +94,6 @@ abstract class TestCase extends BaseTestCase
      */
     public function signInAdmin()
     {
-        return $this->signIn($this->create('App\User', ['role' => 'admin']));
+        return $this->signIn($this->create('App\User', ['group' => 'admin']));
     }
 }

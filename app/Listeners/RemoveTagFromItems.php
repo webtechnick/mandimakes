@@ -26,7 +26,6 @@ class RemoveTagFromItems
      */
     public function handle(TagDeleting $event)
     {
-        $tag = $event->tag;
-        $tag->items()->detach();
+        $event->tag->items()->detach();
     }
 }

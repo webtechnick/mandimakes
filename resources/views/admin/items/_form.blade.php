@@ -43,3 +43,7 @@
     <label for="short_description">Short Description: </label>
     <textarea class="form-control" name="short_description" id="short_description" rows="2">@isset($item){{ $item->short_description }}@else{{ old('short_description') }}@endisset</textarea>
 </div>
+<div class="form-group">
+    <label for="tagString">Tags: (separate by commas)</label>
+    <input type="text" class="form-control" name="tagString" id="tagString" placeholder="Tag, Tag, Tag" @isset($item) value="{{ $item->tagString }}" @else value="{{ old('tagStting') }}" @endisset">
+</div>

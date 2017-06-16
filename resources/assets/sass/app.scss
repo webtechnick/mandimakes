@@ -9,7 +9,20 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Pages
-@import "components/_padding-margin"
+@import "components/_padding-margin";
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+.level {
+    display: flex; align-items: center;
+}
+.flex {
+    flex: 1;
+}
+[v-cloak] {
+    display: none;
+}
 
 form.bluedashed {
     border-style: dashed;

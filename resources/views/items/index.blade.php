@@ -4,7 +4,7 @@
     <div class="container">
 
         @if($filter)
-            <h2>Searching for: "{{ $filter }}"</h2>
+            <h2>Searching for: "{{ $filter }}" <a href="/" class="btn btn-xs btn-default">Clear Search</a></h2>
         @endif
 
         <div class="text-center">
