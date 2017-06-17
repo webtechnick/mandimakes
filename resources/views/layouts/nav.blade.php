@@ -28,6 +28,8 @@
                         @foreach (App\Tag::allForNav() as $tag)
                             <li><a href="/?tags={{ $tag->slug }}"><span class="glyphicon glyphicon-tag"></span> {{ $tag->name }}</a></li>
                         @endforeach
+                        <li class="divider"></li>
+                        <li><a href="/tags">... More ...</a></li>
                     </ul>
                 </li>
                 <li><a href="/about">About Us</a></li>

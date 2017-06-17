@@ -78,6 +78,22 @@ class Tag extends Model
     }
 
     /**
+     * Static call to clear a tag from all related items.
+     * @param  [type] $name [description]
+     * @return [type]       [description]
+     */
+    public static function clearByName($name)
+    {
+        $tag = self::findBySlugOrName($name);
+        if (!$tag) {
+            Log::error('Tag: ' . $name . ' not found.');
+            return false;
+        }
+        $tag->clear();
+        return true;
+    }
+
+    /**
      * Return full list of popular tags for the nav
      * Future itterations should cache this result
      * @return collection of tags

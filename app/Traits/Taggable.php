@@ -100,13 +100,13 @@ trait Taggable
      * @param  [type] $tags  [description]
      * @return [type]        [description]
      */
-    public function scopeByInputTags($query, $tagstring = null)
+    public function scopeByInputTags($query, $tagstring = null, $matchAll = false)
     {
         $tagstring = trim($tagstring);
         $tagstring = str_replace(' ', '', $tagstring);
         $tags = explode(',', $tagstring);
         if (count($tags)) {
-            return $query->byTags($tags);
+            return $query->byTags($tags, $matchAll);
         }
         return $query;
     }

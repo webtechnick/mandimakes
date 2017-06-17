@@ -6,6 +6,8 @@ use App\Address;
 use App\Facades\Cart;
 use App\Sale;
 use App\Shipping;
+use App\Traits\Filterable;
+use App\Traits\FormattedPrice;
 use App\Traits\UtilityScopes;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
-    use UtilityScopes;
+    use UtilityScopes, FormattedPrice, Filterable;
 
     protected $fillable = ['shipping_id','special_request','email','phone', 'stripeToken'];
 
@@ -25,6 +27,11 @@ class Order extends Model
         2 => 'decline',
         3 => 'error',
     ];
+
+    public function getFilters()
+    {
+        return ['email','phone','id'];
+    }
 
     /**
      * An order belongs to a user
@@ -71,6 +78,11 @@ class Order extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function price()
+    {
+        return $this->total_dollars;
+    }
+
     /**
      * My orders scope
      * @param  Builder $query [description]
@@ -98,6 +110,16 @@ class Order extends Model
     public static function unseenCount()
     {
         return self::unseen()->select(['id'])->count();
+    }
+
+    public function statusNice()
+    {
+        return ucwords(self::$statuses[$this->status]);
+    }
+
+    public function adminUrl()
+    {
+        return route('admin.orders.edit', $this);
     }
 
     /**

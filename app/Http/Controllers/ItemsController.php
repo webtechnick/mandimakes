@@ -20,7 +20,8 @@ class ItemsController extends Controller
             $query->filter($filter);
         }
         if ($tags = $request->input('tags')) {
-            $query->byInputTags($tags);
+            $strict = $request->input('strict') ?: false;
+            $query->byInputTags($tags, $strict);
         }
 
         $items = $query->paginate();

@@ -13,10 +13,14 @@ class AdminOrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::latest()->paginate();
-        return view('admin.orders.index',compact('orders'));
+        $query = Order::latest();
+        if ($filter = $request->input('q')) {
+            $query->filter($filter);
+        }
+        $orders = $query->paginate();
+        return view('admin.orders.index',compact('orders', 'filter'));
     }
 
     /**

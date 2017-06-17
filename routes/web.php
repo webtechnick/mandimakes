@@ -67,6 +67,9 @@ Route::get('/', 'ItemsController@index')->name('items');
 Route::post('/', 'ItemsController@index')->name('items.post');
 Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
 
+// Tags
+Route::get('/tags', 'TagsController@index')->name('tags.index');
+
 // Users
 Auth::routes();
 Route::get('/account', 'UsersController@account')->name('account')->middleware('auth');

@@ -128,22 +128,7 @@ class Item extends Model
      */
     public static function clearNew()
     {
-        return self::clearTag('new');
-    }
-
-    /**
-     * Clear the new tag
-     * @return [type] [description]
-     */
-    public static function clearTag($name)
-    {
-        $tag = Tag::findBySlugOrName($name);
-        if (!$tag) {
-            Log::error('Tag: ' . $name . ' not found.');
-            return false;
-        }
-        $tag->clear();
-        return true;
+        return Tag::clearByName('new');
     }
 
     /**
