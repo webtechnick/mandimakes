@@ -19,7 +19,7 @@ class TagsTableSeeder extends Seeder
         ];
 
         foreach ($data as $tag) {
-            factory(Tag::class)->create($tag);
+            Tag::create($tag);
         }
     }
 }
