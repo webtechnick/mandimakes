@@ -2,6 +2,7 @@
 
 @section('actions')
     <li><a href="/admin/items/create"><span class="glyphicon glyphicon-plus"></span> New Item</a></li>
+    <li><a href="/admin/items/clear_new"><span class="glyphicon glyphicon-ban-circle"></span> Clear New</a></li>
 @endsection
 
 @section('panel')

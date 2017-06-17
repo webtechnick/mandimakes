@@ -168,6 +168,24 @@ class ItemTest extends TestCase
         $this->assertEquals(3, Tag::count()); // Didn't create any new tags
     }
 
+    /** @test */
+    public function it_should_clear_all_new_tags()
+    {
+        $item = factory(Item::class)->create();
+        $item2 = factory(Item::class)->create();
+        $tag = factory(Tag::class)->create(['name' => 'New', 'slug' => 'new']);
+
+        $item->addTag($tag);
+        $item2->addTag($tag);
+
+        $this->assertEquals('New', $item->tagString);
+
+        Item::clearNew();
+
+        $this->assertEquals('', $item->fresh()->tagString);
+        $this->assertEquals('', $item2->fresh()->tagString);
+    }
+
     public function it_should_have_related_items()
     {
         $item = factory(Item::class)->create();

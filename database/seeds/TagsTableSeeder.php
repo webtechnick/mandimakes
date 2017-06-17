@@ -13,6 +13,8 @@ class TagsTableSeeder extends Seeder
     public function run()
     {
         $data = [
+            ['name' => 'New'],
+            ['name' => 'Featured'],
             ['name' => 'Dragon'],
         ];
 

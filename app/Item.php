@@ -46,6 +46,15 @@ class Item extends Model
         ];
     }
 
+    public function updateFromRequest($data)
+    {
+        $this->update($data);
+        if (isset($data['tagString'])) {
+            $this->syncTagString($data['tagString']);
+        }
+        return $this;
+    }
+
     /**
      * An item has many sales
      * @return [type] [description]
@@ -111,6 +120,30 @@ class Item extends Model
             $item->syncTagString($data['tagString']);
         }
         return $item;
+    }
+
+    /**
+     * Wrapper for clearTag
+     * @return [type] [description]
+     */
+    public static function clearNew()
+    {
+        return self::clearTag('new');
+    }
+
+    /**
+     * Clear the new tag
+     * @return [type] [description]
+     */
+    public static function clearTag($name)
+    {
+        $tag = Tag::findBySlugOrName($name);
+        if (!$tag) {
+            Log::error('Tag: ' . $name . ' not found.');
+            return false;
+        }
+        $tag->clear();
+        return true;
     }
 
     /**

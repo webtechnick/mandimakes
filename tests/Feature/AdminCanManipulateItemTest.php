@@ -36,4 +36,21 @@ class AdminCanManipulateItemTest extends TestCase
         $this->assertEquals(1, Item::count());
         $this->assertEquals(2, Tag::count());
     }
+
+    /** @test */
+    public function admin_should_be_able_to_update_item_with_tags()
+    {
+        $this->signInAdmin();
+        $item = $this->create('App\Item');
+
+        $data = array_merge($item->toArray(), [
+            'tagString' => 'Dragon,Egg'
+        ]);
+
+        $this->assertEquals(0, Tag::count());
+
+        $this->patch('/admin/items/edit/' . $item->id, $data)
+             ->assertSessionMissing('errors');
+        $this->assertEquals(2, Tag::count());
+    }
 }

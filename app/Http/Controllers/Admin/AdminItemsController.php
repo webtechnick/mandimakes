@@ -72,10 +72,17 @@ class AdminItemsController extends Controller
      */
     public function update(ItemRequest $request, Item $item)
     {
-        $item->fill($request->all())->save();
+        $item->updateFromRequest($request->all());
 
         $this->goodFlash('Item Updated');
         return redirect()->route('admin.items');
+    }
+
+    public function clear_new()
+    {
+        Item::clearNew();
+        $this->goodFlash('New Items Cleared');
+        back();
     }
 
     /**

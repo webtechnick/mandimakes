@@ -25,9 +25,9 @@
                         Products <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-tag"></span> Tag</a></li>
+                        @foreach (App\Tag::allForNav() as $tag)
+                            <li><a href="/?tags={{ $tag->slug }}"><span class="glyphicon glyphicon-tag"></span> {{ $tag->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a href="/about">About Us</a></li>

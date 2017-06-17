@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Tag;
+use Illuminate\Support\Facades\Log;
 
 trait Taggable
 {
