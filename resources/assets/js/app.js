@@ -11,9 +11,16 @@ require('./modules/confirm');
 
 require('lightbox2');
 
+require('tinymce');
+
 window.Dropzone = require('dropzone');
 
 window.Vue = require('vue');
+
+tinymce.init({
+    selector:'.tinymce',
+    themes: "modern",
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

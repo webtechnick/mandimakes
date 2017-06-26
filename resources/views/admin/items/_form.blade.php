@@ -37,7 +37,7 @@
 </div>
 <div class="form-group">
     <label for="description">Description: </label>
-    <textarea class="form-control" name="description" id="description" rows="5" required>@isset($item){{ $item->description }}@else{{ old('description') }}@endisset</textarea>
+    <textarea class="form-control tinymce" name="description" id="description" rows="5" required>@isset($item){{ $item->description }}@else{{ old('description') }}@endisset</textarea>
 </div>
 <div class="form-group">
     <label for="short_description">Short Description: </label>

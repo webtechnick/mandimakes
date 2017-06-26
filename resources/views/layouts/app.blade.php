@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script> -->
     <!-- <script src="{{ asset('js/libs.js') }}"></script> -->
     @yield('scripts')
 </body>

@@ -23,5 +23,9 @@ mix.styles([
 //     'node_modules/lightbox2/dist/js/lightbox.js'
 // ], 'public/js/libs.js');
 
+// Copy assets
 mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/fonts/bootstrap');
 mix.copy('node_modules/lightbox2/dist/images/', 'public/images');
+mix.copy('node_modules/tinymce/plugins', 'public/js/plugins');
+mix.copy('node_modules/tinymce/skins', 'public/js/skins');
+mix.copy('node_modules/tinymce/themes', 'public/js/themes');
