@@ -10,7 +10,7 @@
 
                 <div class="caption">
                     <h3>{{ $item->title }}</h3>
-                    <p>{{ $item->short_description }}</p>
+                    <p>{!! $item->short_description !!}</p>
                     <p>
                         <a href="{{ route('carts.add', [$item]) }}" class="btn btn-primary">Add To Cart</a>
                         @if ($user AND $user->isAdmin())

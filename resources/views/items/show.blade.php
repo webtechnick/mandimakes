@@ -13,7 +13,7 @@
                     @include('items.photos', ['item' => $item])
 
                     <div class="well">
-                        {{ $item->description }}
+                        {!! $item->description !!}
                     </div>
                 </div>
             </div>
