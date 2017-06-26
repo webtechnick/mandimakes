@@ -27,6 +27,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\OrderSuccess' => [
             'App\Listeners\SendThankYouNotification',
+            'App\Listeners\SendAdminNotification',
         ],
         'App\Events\OrderShipped' => [
             'App\Listeners\SendShippmentNotification',

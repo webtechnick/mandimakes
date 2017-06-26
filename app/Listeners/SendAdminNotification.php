@@ -3,12 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\OrderSuccess;
-use App\Mail\OrderThankYou;
+use App\Mail\NewOrder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendThankYouNotification
+class SendAdminNotification
 {
     /**
      * Create the event listener.
@@ -28,6 +28,6 @@ class SendThankYouNotification
      */
     public function handle(OrderSuccess $event)
     {
-        Mail::to($event->order->email)->send(new OrderThankYou($event->order));
+        Mail::to(config('mail.from.address'))->send(new NewOrder($event->order));
     }
 }

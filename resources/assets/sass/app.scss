@@ -14,8 +14,17 @@
 .navbar-brand {
     padding: 5px 15px;
 }
+.navbar-default .navbar-nav li a.nav-btn,
+.nav-btn{
+    color: #fff;
+}
+.navbar-default .navbar-nav li a.nav-btn:hover,
+.nav-btn:hover{
+    background-color: darken($brand-primary, 10%);
+}
 .level {
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
 }
 .flex {
     flex: 1;

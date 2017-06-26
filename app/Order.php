@@ -28,6 +28,10 @@ class Order extends Model
         3 => 'error',
     ];
 
+    public $casts = [
+        'is_approved' => 'boolean'
+    ];
+
     public function getFilters()
     {
         return ['email','phone','id'];
@@ -180,7 +184,7 @@ class Order extends Model
      */
     public static function createFromStripe($data)
     {
-        $order = new Order($data);
+        $order = new self($data);
 
         // Assign the email
         $order->email = $data['stripeEmail'];
@@ -228,6 +232,7 @@ class Order extends Model
     {
         $this->markOutcome($outcome);
         $this->status = 1;
+        $this->is_approved = true;
         return $this;
     }
 
@@ -239,6 +244,7 @@ class Order extends Model
     {
         $this->markOutcome($outcome);
         $this->status = 2;
+        $this->is_approved = false;
         return $this;
     }
 
@@ -250,6 +256,7 @@ class Order extends Model
     {
         $this->markOutcome($outcome);
         $this->status = 3;
+        $this->is_approved = false;
         return $this;
     }
 
@@ -312,6 +319,15 @@ class Order extends Model
      */
     public function isGood()
     {
-        return $this->status == 1;
+        return $this->is_approved == 1;
+    }
+
+    /**
+     * Decide what mailings should be sent out.
+     * @return [type] [description]
+     */
+    public function notify()
+    {
+
     }
 }

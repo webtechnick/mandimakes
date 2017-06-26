@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderThankYou extends Mailable
+class NewOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,8 +31,9 @@ class OrderThankYou extends Mailable
      */
     public function build()
     {
-        return $this->to($this->order->email)
-                    ->subject('Thank you for your recent order!')
-                    ->markdown('emails.orders.thank_you');
+        $to = config('mail.from.address');
+        return $this->to($to)
+                    ->subject('New Order: ' . $order->formattedPrice())
+                    ->markdown('emails.orders.new');
     }
 }

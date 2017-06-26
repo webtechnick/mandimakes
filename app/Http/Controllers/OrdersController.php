@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderSuccess;
 use App\Facades\Cart;
 use App\Order;
 use App\Traits\Flashes;
@@ -49,6 +50,7 @@ class OrdersController extends Controller
         $order->charge();
 
         if ($order->isGood()) {
+            event(new OrderSuccess($order));
             Cart::clear();
             $this->goodFlash('Thank you for your purchase.');
             return redirect()->route('myorders');

@@ -70,6 +70,7 @@ $factory->define(\App\Order::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'email' => $faker->safeEmail,
         'is_new' => 1,
+        'is_approved' => 0,
         'special_request' => null,
         'shipping_price_dollars' => $shipping_dollars,
         'discount_dollars' => 0,

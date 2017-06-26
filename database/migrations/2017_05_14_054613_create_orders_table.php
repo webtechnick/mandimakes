@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping_address_id')->index()->unsigned();
             $table->string('phone',20)->nullable();
             $table->string('email');
+            $table->tinyInteger('is_approved')->index()->default(0);
             $table->string('stripeToken')->nullable();
             $table->text('stripeOutcome')->nullable();
             $table->tinyInteger('is_new')->index()->unsigned()->default(1); // 1 = new, 0 = seen

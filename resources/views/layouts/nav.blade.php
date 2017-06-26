@@ -37,7 +37,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                <li><a href="/checkout"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{ Cart::text() }}</a></li>
+                <li><a href="/checkout" class="nav-btn btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{ Cart::text() }}</a></li>
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
