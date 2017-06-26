@@ -11,7 +11,7 @@ require('./modules/confirm');
 
 require('lightbox2');
 
-require('tinymce');
+window.tinymce = require('tinymce');
 
 window.Dropzone = require('dropzone');
 
