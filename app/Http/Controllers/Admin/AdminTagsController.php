@@ -71,7 +71,7 @@ class AdminTagsController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $tag->fill($request->all())->save();
+        $tag->update($request->all());
 
         $this->goodFlash('Tag Updated');
         return redirect()->route('admin.tags');

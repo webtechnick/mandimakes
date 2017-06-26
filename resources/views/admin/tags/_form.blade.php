@@ -9,3 +9,10 @@
     <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" @isset($tag) value="{{ $tag->slug }}" @else value="{{ old('slug') }}" @endisset>
     <p class="help-block">If left empty, a slug will automatically be genereated.</p>
 </div>
+
+<div class="checkbox">
+    <label>
+        {{ Form::hidden('is_nav', 0) }}
+        {{ Form::checkbox('is_nav', 1, isset($tag) ? $tag->is_nav : true) }} Show In Top Navigation
+    </label>
+</div>

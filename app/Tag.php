@@ -13,8 +13,12 @@ class Tag extends Model
 {
     use Sluggable, Filterable;
 
-    protected $fillable = [
-        'name', 'slug'
+protected $fillable = [
+        'name', 'slug', 'is_nav'
+    ];
+
+    protected $casts = [
+        'is_nav' => 'boolean',
     ];
 
     protected $events = [
@@ -57,11 +61,22 @@ class Tag extends Model
         return self::mergeTags($this, $from);
     }
 
+    /**
+     * Scope for finding tag by name or slug
+     * @param  [type] $query [description]
+     * @param  [type] $name  [description]
+     * @return [type]        [description]
+     */
     public function scopeByName($query, $name)
     {
         return $query->where('name', $name)->orWhere('slug', $name);
     }
 
+    /**
+     * Find the tag by slug or name
+     * @param  [type] $name [description]
+     * @return [type]       [description]
+     */
     public static function findBySlugOrName($name)
     {
         return self::byName($name)->first();
@@ -102,6 +117,7 @@ class Tag extends Model
     {
         return Cache::remember('tags_nav', 60, function () {
             return self::select(['name','slug'])
+                    ->where('is_nav', true)
                     ->orderBy('name', 'asc')
                     ->limit(20)
                     ->get();

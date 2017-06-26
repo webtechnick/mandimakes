@@ -17,6 +17,7 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unqiue();
+            $table->tinyInteger('is_nav')->index()->unsigned()->default(1);
             $table->timestamps();
         });
     }
