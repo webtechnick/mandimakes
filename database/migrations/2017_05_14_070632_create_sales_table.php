@@ -21,6 +21,10 @@ class CreateSalesTable extends Migration
             $table->text('description');
             $table->float('price_dollars')->unsigned();
             $table->timestamps();
+
+            // Added in migration
+            // $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            // $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

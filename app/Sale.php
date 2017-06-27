@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     protected $fillable = ['item_id','description','qty','price_dollars'];
+
+    protected $events = [
+        'deleting' => SaleDeleting::class,
+        'created' => SaleCreated::class,
+    ];
     /**
      * Item belongs to Sale
      * @return [type] [description]

@@ -31,8 +31,8 @@
             @foreach($orders as $order)
                 <tr>
                     <td class="text-center"> {{ $order->statusNice() }} </td>
-                    <td class="text-center"> // TODO </td>
-                    <td class="hidden-sm hidden-xs text-left"> // TODO </td>
+                    <td class="text-left"> @include('orders._sales') </td>
+                    <td class="hidden-sm hidden-xs text-left"> {{ $order->email }} </td>
                     <td class="text-center">{{ $order->formattedPrice() }}</td>
                     <td class="col-md-2 text-right">
                         <div class="btn-group">
@@ -42,7 +42,7 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="/admin/orders/{{ $order->id }}/photos">Update Tracking</a></li>
+                                <li><a href="/admin/orders/{{ $order->id }}/edit">Update Tracking</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/admin/orders/delete/{{ $order->id }}" class="confirm" confirm-message="Are you sure you want to delete this order?">Delete</a></li>
                             </ul>

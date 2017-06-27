@@ -22,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\PhotoDeleting' => [
             'App\Listeners\RemovePhotoFiles',
         ],
+        'App\Events\SaleCreated' => [
+            'App\Listeners\ReduceItemStock',
+        ],
+        'App\Events\SaleDeleting' => [
+            'App\Listeners\IncreaseItemStock',
+        ],
         'App\Events\TagDeleting' => [
             'App\Listeners\RemoveTagFromItems',
         ],

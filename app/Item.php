@@ -284,6 +284,33 @@ class Item extends Model
     }
 
     /**
+     * Reduce the item stock by qty passed in.
+     * @param  [type] $qty [description]
+     * @return [type]      [description]
+     */
+    public function reduceStock($qty = 1)
+    {
+        $newQty = $this->qty - $qty;
+        if ($newQty < 0) {
+            $newQty = 0;
+        }
+        $this->qty = $newQty;
+        return $this->save();
+    }
+
+    /**
+     * Increase the item stock
+     * @param  integer $qty [description]
+     * @return [type]       [description]
+     */
+    public function increaseStock($qty = 1)
+    {
+        $newQty = $this->qty + $qty;
+        $this->qty = $newQty;
+        return $this->save();
+    }
+
+    /**
      * Available scope
      * @param  [type] $query [description]
      * @return [type]        [description]

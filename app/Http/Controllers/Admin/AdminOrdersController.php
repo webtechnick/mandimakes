@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Traits\Flashes;
 use Illuminate\Http\Request;
 
 class AdminOrdersController extends Controller
 {
+    use Flashes;
     /**
      * Display a listing of the resource.
      *
@@ -84,8 +86,12 @@ class AdminOrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        $this->goodFlash('Order deleted.');
+
+        return redirect()->route('admin.orders');
     }
 }

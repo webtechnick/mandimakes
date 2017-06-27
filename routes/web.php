@@ -20,9 +20,9 @@ Route::group([
 ], function() {
     // Orders
     Route::get('/', 'AdminOrdersController@index')->name('orders');
-    Route::get('/orders/edit/{item}', 'AdminOrdersController@edit')->name('orders.edit');
-    Route::patch('/orders/edit/{item}', 'AdminOrdersController@update')->name('orders.update');
-    Route::get('/orders/delete/{item}', 'AdminOrdersController@destroy')->name('orders.delete');
+    Route::get('/orders/edit/{order}', 'AdminOrdersController@edit')->name('orders.edit');
+    Route::patch('/orders/edit/{order}', 'AdminOrdersController@update')->name('orders.update');
+    Route::get('/orders/delete/{order}', 'AdminOrdersController@destroy')->name('orders.delete');
 
     // Items
     Route::get('/items', 'AdminItemsController@index')->name('items');

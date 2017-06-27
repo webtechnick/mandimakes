@@ -15,8 +15,8 @@
                 </tr>
                 @foreach ($orders as $order)
                     <tr>
-                        <td class="text-left"> {{ $order->created_at->diffForHumans() }} (Pending) </td>
-                        <td class="text-center"> // TODO </td>
+                        <td class="text-left"> {{ $order->created_at->diffForHumans() }} ({{ $order->statusNice() }}) </td>
+                        <td class="text-left"> @include('orders._sales') </td>
                         <td class="text-right"> $ {{ $order->total_dollars }} </td>
                         <td class="col-md-2 text-right">
                             <div class="btn-group">
@@ -26,9 +26,8 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Duplicate</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#" class="confirm" confirm-message="Are you sure you want to cancel this order?">Cancel Order</a></li>
+                                    <!-- <li role="separator" class="divider"></li> -->
+                                    <!-- <li><a href="#" class="confirm" confirm-message="Are you sure you want to cancel this order?">Cancel Order</a></li> -->
                                 </ul>
                             </div>
                         </td>

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Address;
+use App\Events\OrderDeleting;
 use App\Facades\Cart;
 use App\Sale;
 use App\Shipping;

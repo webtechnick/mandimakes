@@ -9,6 +9,9 @@
                 <li role="presentation" @if(Route::currentRouteName() == 'users.password') class="active" @endif><a href="/account/password"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Security</a></li>
                 <li role="presentation" @if(Route::currentRouteName() == 'myorders') class="active" @endif><a href="/my-orders"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> My Orders</a></li>
                 <li role="presentation">@include('layouts._logout')</li>
+                @if ($user->isAdmin())
+                    <li role="presentation"><li><a href="/admin"><span class="glyphicon glyphicon-tasks"></span> Admin</a></li></li>
+                @endif
             </ul>
         </div>
         <div class="col-md-9">
