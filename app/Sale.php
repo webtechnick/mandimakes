@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\SaleCreated;
+use App\Events\SaleDeleting;
 use App\Facades\Cart;
 use App\Item;
 use App\Order;

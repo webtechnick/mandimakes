@@ -11,7 +11,7 @@
         <td class="text-center">
             {!! $cart->item->pic('50') !!}
         </td>
-        <td class="hidden-sm hidden-xs">{{ $cart->item->short_description }}</td>
+        <td class="hidden-sm hidden-xs">{!! $cart->item->short_description !!}</td>
         <td class="text-center">
             <form action="{{ route('carts.post.change', [$cart->item]) }}" method="POST" class="form-inline">
                 {{ csrf_field() }}

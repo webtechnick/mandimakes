@@ -204,4 +204,40 @@ class ItemTest extends TestCase
         $this->assertCount(1, $related);
         $this->assertEquals($related[0]->id, $item2->id);
     }
+
+    /** @test */
+    public function it_can_increase_in_stock()
+    {
+        $item = factory(Item::class)->create();
+
+        $this->assertEquals(1, $item->qty);
+
+        $item->increaseStock(2);
+
+        $this->assertEquals(3, $item->qty);
+    }
+
+    /** @test */
+    public function it_can_decrease_in_stock()
+    {
+        $item = factory(Item::class)->create();
+
+        $this->assertEquals(1, $item->qty);
+
+        $item->reduceStock(1);
+
+        $this->assertEquals(0, $item->qty);
+    }
+
+    /** @test */
+    public function it_cannot_decrease_past_zero()
+    {
+        $item = factory(Item::class)->create();
+
+        $this->assertEquals(1, $item->qty);
+
+        $item->reduceStock(10);
+
+        $this->assertEquals(0, $item->qty);
+    }
 }
