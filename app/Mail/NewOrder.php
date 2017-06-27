@@ -33,7 +33,7 @@ class NewOrder extends Mailable
     {
         $to = config('mail.from.address');
         return $this->to($to)
-                    ->subject('New Order: ' . $order->formattedPrice())
+                    ->subject('New Order: ' . $this->order->formattedPrice())
                     ->markdown('emails.orders.new');
     }
 }
