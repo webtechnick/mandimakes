@@ -39,14 +39,14 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
+            <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3>Related Items</h3>
                 </div>
                 <div class="panel-body">
                     // TODO
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
