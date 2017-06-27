@@ -24,7 +24,7 @@ class ItemsController extends Controller
             $query->byInputTags($tags, $strict);
         }
 
-        $items = $query->paginate();
+        $items = $query->paginate(9);
         return view('items.index', compact('items','filter'));
     }
 
