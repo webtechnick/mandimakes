@@ -31,7 +31,8 @@
                 </div>
                 <div class="panel-body">
                     <a href="/carts/add/{{ $item->id }}" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add To Cart</a>
-                    <a href="/commission/{{ $item->id }}/create" class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Commission Request</a>
+                    <a href="https://www.facebook.com/MandiMakesShop" target="_blank" class="btn btn-default btn-lg btn-block confirm" confirm-message="Message us on Facebook"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Commission Request</a>
+                    <!-- <a href="/commission/{{ $item->id }}/create" class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Commission Request</a> -->
                     @if ($user AND $user->isAdmin())
                         <a href="{{ $item->adminUrl() }}" class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                     @endif
