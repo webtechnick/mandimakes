@@ -159,9 +159,9 @@ class Order extends Model
         if (!$user) {
             // User not found, create user.
             $user = User::createFromStripe(['name' => $name, 'email' => $email]);
-            // Login the user
-            Auth::login($user);
         }
+        // Login the user
+        Auth::login($user);
 
         $this->user()->associate($user);
         return $this;
