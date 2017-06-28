@@ -26,8 +26,7 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <!-- <li role="separator" class="divider"></li> -->
-                                    <!-- <li><a href="#" class="confirm" confirm-message="Are you sure you want to cancel this order?">Cancel Order</a></li> -->
+                                    <li><a href="#">Track Order</a></li>
                                 </ul>
                             </div>
                         </td>

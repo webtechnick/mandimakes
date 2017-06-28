@@ -26,6 +26,8 @@ class ReduceItemStock
      */
     public function handle(SaleCreated $event)
     {
-        $event->sale->item->reduceStock($event->sale->qty);
+        if ($event->sale->item) {
+            $event->sale->item->reduceStock($event->sale->qty);
+        }
     }
 }

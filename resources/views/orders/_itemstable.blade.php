@@ -25,7 +25,7 @@
     @endif
     <tr>
         <td colspan="3" class="text-right">Shipping:</td>
-        <td class="text-right">{{ format_price($order->shipping_dollars) }}</td>
+        <td class="text-right">{{ format_price($order->shipping_price_dollars) }}</td>
     </tr>
     <tr>
         <td colspan="3" class="text-right"><strong>Total:</strong></td>

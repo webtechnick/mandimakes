@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class Cart
 {
-    public $items = [];
+    /**
+     * Collection of LineItem
+     * @var [LineItem]
+     */
+    public $items;
 
     /**
      * Use the request object to talk to the session
@@ -88,6 +92,17 @@ class Cart
     public function itemCount()
     {
         return $this->items->count();
+    }
+
+    /**
+     * Calculate the total qty in the cart
+     * @return [type] [description]
+     */
+    public function totalQty()
+    {
+        return $this->items->sum(function($cart) {
+            return $cart->qty;
+        });
     }
 
     /**
@@ -173,7 +188,7 @@ class Cart
                 data-zip-code="true"
                 data-email="'. $email .'"
                 data-description="Purchase From Mandi Makes"
-                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-image="https://mandimakes.shop/images/logo-transparent-sm.png"
                 data-locale="auto">
             </script>';
     }

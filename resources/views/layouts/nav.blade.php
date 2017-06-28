@@ -19,14 +19,15 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="/?tags=new">New Items</a></li>
+                <li><a href="{{ route('items') }}">Shop</a></li>
+                <li><a href="{{ route('items', ['tags' => 'new']) }}">New Items</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         Products <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         @foreach (App\Tag::allForNav() as $tag)
-                            <li><a href="/?tags={{ $tag->slug }}"><span class="glyphicon glyphicon-tag"></span> {{ $tag->name }}</a></li>
+                            <li><a href="{{ route('items', ['tags' => $tag->slug]) }}"><span class="glyphicon glyphicon-tag"></span> {{ $tag->name }}</a></li>
                         @endforeach
                         <li class="divider"></li>
                         <li><a href="/tags">... More ...</a></li>

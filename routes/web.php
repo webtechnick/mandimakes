@@ -63,8 +63,9 @@ Route::group([
 });
 
 // Items
-Route::get('/', 'ItemsController@index')->name('items');
-Route::post('/', 'ItemsController@index')->name('items.post');
+Route::get('/', 'ItemsController@featured')->name('featured');
+Route::get('/store', 'ItemsController@index')->name('items');
+Route::post('/store', 'ItemsController@index')->name('items.post');
 Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
 
 // Tags

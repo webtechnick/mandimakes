@@ -319,4 +319,15 @@ class Item extends Model
     {
         return $query->where('status', 1);
     }
+
+    /**
+     * Get the current featured list of items.
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeFeatured($query)
+    {
+        $featured = config('app.featured') ?: 'new'; // TODO, customizable using Settings
+        return $query->byInputTags($featured, true);
+    }
 }

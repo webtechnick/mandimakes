@@ -174,7 +174,16 @@ class Order extends Model
      */
     public function calcuateTotalDollars()
     {
-        $this->total_dollars = Cart::subTotal();
+        $subtotal = Cart::subTotal();
+        $this->tax_dollars = 0;
+        $this->discount_dollars = 0;
+        $this->shipping_price_dollars = 0;
+        if ($this->shipping) {
+            $this->shipping_price_dollars = $this->shipping->price_dollars;
+        }
+
+        // Total the order
+        $this->total_dollars = $subtotal + $this->tax_dollars + $this->shipping_dollars - $this->discount_dollars;
         return $this;
     }
 

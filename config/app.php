@@ -14,6 +14,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'featured' => env('FEATURED_TAG', 'new'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

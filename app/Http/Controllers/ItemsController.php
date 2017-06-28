@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class ItemsController extends Controller
 {
     /**
+     * Featured page, homepage
+     * @return [type] [description]
+     */
+    public function featured()
+    {
+        $items = Item::featured()->get();
+        return view('items.featured', compact('items'));
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
