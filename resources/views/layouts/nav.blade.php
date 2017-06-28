@@ -62,7 +62,7 @@
                 @endif
             </ul>
 
-            <form action="/" method="GET" class="navbar-form navbar-right">
+            <form action="/" method="GET" class="navbar-form navbar-right hidden-sm">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" id="topsearch" placeholder="Search">
                     <span class="input-group-btn">
