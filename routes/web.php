@@ -51,7 +51,7 @@ Route::group([
     Route::get('/users/create', 'AdminUsersController@create')->name('users.create');
     Route::get('/users/edit/{user}', 'AdminUsersController@edit')->name('users.edit');
     Route::patch('/users/edit/{user}', 'AdminUsersController@update')->name('users.update');
-    Route::get('/users/delete/{user}', 'AdminUsersController@destroy')->name('shippings.delete');
+    Route::get('/users/delete/{user}', 'AdminUsersController@destroy')->name('users.delete');
 
     // Shippings
     Route::get('/shippings', 'AdminShippingsController@index')->name('shippings');

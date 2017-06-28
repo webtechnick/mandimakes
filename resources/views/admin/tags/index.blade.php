@@ -28,14 +28,14 @@
                 <tr>
                     <th class="hidden-sm hidden-xs text-center">Id</th>
                     <th class="text-left">Name</th>
-                    <th class="text-left">Slug</th>
+                    <th class="text-left hidden-sm hidden-xs ">Slug</th>
                     <th class="text-right">Actions</th>
                 </tr>
             @foreach($tags as $tag)
                 <tr>
                     <td class="hidden-sm hidden-xs text-center">{{ $tag->id }}</td>
                     <td class="text-left">{{ $tag->name }}</td>
-                    <td class="text-left">{{ $tag->slug }}</td>
+                    <td class="text-left hidden-sm hidden-xs ">{{ $tag->slug }}</td>
                     <td class="col-md-2 text-right">
                         <div class="btn-group">
                             <a href="{{ route('admin.tags.edit', [$tag]) }}" class="btn btn-info"> Edit</a>
