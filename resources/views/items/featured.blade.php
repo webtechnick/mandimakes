@@ -21,7 +21,7 @@
                 <h1>Featured Items</h1>
             </div>
             <div class="panel-body">
-                <div class="slick">
+                <div class="autoplay">
                     @foreach($items as $item)
                         <div>
                             @include('items._itemlist')
@@ -35,14 +35,16 @@
 
 @section('scripts')
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script>
-    $('.slick').slick({
+    $('.autoplay').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3500,
-        arrows: false,
+        autoplaySpeed: 2500,
+        arrows: true,
+        dots: true
     });
     </script>
 @endsection
