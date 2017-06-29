@@ -87,14 +87,4 @@ class OrderTest extends TestCase
         $this->assertEquals(30, $order->total_dollars);
         $this->assertTrue($order->fresh()->isNew());
     }
-
-    /** @test */
-    public function it_should_notify_admin_of_new_order()
-    {
-        $this->buildCart();
-        $data = $this->stripeData();
-        $order = Order::createFromStripe($data);
-
-
-    }
 }

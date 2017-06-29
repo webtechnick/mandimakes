@@ -1,6 +1,7 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 @section('panel')
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1>Order # {{ $order->id }} <small>({{ $order->statusNice() }})</small></h1>
@@ -24,11 +25,14 @@
 
             <h2>Order Tracking</h2>
 
-            @if ($order->tracking_number)
-                <a href="{{ $order->trackingUrl() }}" target="_blank" class="btn btn-primary btn-lg">Track My Order</a>
-            @else
-                <p>Your order will be shipped soon.</p>
-            @endif
+            {{ Form::model($order, ['route' => ['admin.orders.update', $order], 'method' => 'PATCH']) }}
+                <div class="form-group">
+                    {{ Form::text('tracking_number', null, ['placeholder' => 'Tracking Number', 'class' => 'form-control']) }}
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success btn-lg">Update Order</button>
+                </div>
+            {{ Form::close() }}
         </div>
     </div>
 @endsection

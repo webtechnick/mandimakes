@@ -18,7 +18,7 @@ class Order extends Model
 {
     use UtilityScopes, FormattedPrice, Filterable;
 
-    protected $fillable = ['shipping_id','special_request','email','phone', 'stripeToken'];
+    protected $fillable = ['shipping_id','special_request','email','phone','stripeToken','tracking_number'];
 
     protected $with = ['sales'];
 
@@ -27,6 +27,7 @@ class Order extends Model
         1 => 'success',
         2 => 'decline',
         3 => 'error',
+        4 => 'shipped',
     ];
 
     public $casts = [
@@ -312,8 +313,11 @@ class Order extends Model
             ]);
 
             $this->markSuccess($charge->outcome->__toJSON());
+            //$this->stripeCharge = $charge->id;
+
         } catch(\Stripe\Error\Card $e) { // Card Declined.
             $this->markDecline($e->getMessage());
+            //$this->stripeCharge = $e->jsonBody['error']['charge'];
         } catch (\Stripe\Error\Base $e) { // Card Error
             $this->markError($e->getMessage());
         }
@@ -330,6 +334,27 @@ class Order extends Model
     public function isGood()
     {
         return $this->is_approved == 1;
+    }
+
+    /**
+     * Return if the order has a tracking information associated to it.
+     * @return boolean [description]
+     */
+    public function hasTracking()
+    {
+        return !!$this->tracking_number;
+    }
+
+    /**
+     * Return the tracking URL
+     * @return [type] [description]
+     */
+    public function trackingUrl()
+    {
+        if (!$this->hasTracking()) {
+            return null;
+        }
+        return 'https://tools.usps.com/go/TrackConfirmAction.action?tLabels=' . $this->tracking_number;
     }
 
     /**
