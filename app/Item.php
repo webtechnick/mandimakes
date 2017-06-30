@@ -278,6 +278,7 @@ class Item extends Model
     {
         return self::byInputTags($this->tagSlugString)
                    ->where('id', '<>', $this->id)
+                   ->inRandomOrder()
                    ->limit($count)
                    ->get();
     }
