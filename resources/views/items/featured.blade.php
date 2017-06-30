@@ -5,19 +5,6 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1>Welcome to Mandi Makes Shop</h1>
-            </div>
-            <div class="panel-body">
-                <p>Where everything is handmade, handcrafted, and made with love from all our favorite fandoms!</p>
-
-                <div class="text-center">
-                    <a href="{{ route('items') }}" class="btn btn-primary btn-lg">Browse All Items!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
                 <h1>Featured Items</h1>
             </div>
             <div class="panel-body">
@@ -30,6 +17,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="text-center">
+                    <a href="{{ route('items') }}"><img src="/images/logo-lg.jpg" class="img-rounded"></a>
+                </div>
+
+                <div class="jumbotron">
+                    <p>Where everything is handmade, handcrafted, and made with love from all our favorite fandoms!</p>
+                    <div class="text-right">
+                        <a href="{{ route('items') }}" class="btn btn-primary btn-lg">Shop Now!</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
 @endsection
 

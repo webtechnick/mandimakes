@@ -11,6 +11,12 @@
 // Pages
 @import "components/_padding-margin";
 
+// Footer
+@import "components/_footer";
+
+#app {
+    min-height: 650px;
+}
 .navbar-brand {
     padding: 5px 15px;
 }

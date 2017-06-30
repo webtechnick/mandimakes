@@ -66,6 +66,15 @@ trait Taggable
     }
 
     /**
+     * TagString as slugs for use with byInputTags
+     * @return [type] [description]
+     */
+    public function getTagSlugStringAttribute()
+    {
+        return $this->tags()->pluck('slug')->implode(',');
+    }
+
+    /**
      * Attach more than one tag
      * @param [array] $tags [description]
      */

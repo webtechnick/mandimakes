@@ -276,11 +276,10 @@ class Item extends Model
      */
     public function related($count = 3)
     {
-        // Look at $this->tags and build up related items.
-        $tags = $this->tags()->pluck('slug');
-        if ($tags->isEmpty()) {
-            return collect([]);
-        }
+        return self::byInputTags($this->tagSlugString)
+                   ->where('id', '<>', $this->id)
+                   ->limit($count)
+                   ->get();
     }
 
     /**

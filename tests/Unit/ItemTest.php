@@ -186,6 +186,7 @@ class ItemTest extends TestCase
         $this->assertEquals('', $item2->fresh()->tagString);
     }
 
+    /** @test */
     public function it_should_have_related_items()
     {
         $item = factory(Item::class)->create();

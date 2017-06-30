@@ -7,7 +7,14 @@
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1>{{ $item->title }} <span class="label label-default pull-right">{{ $item->formattedPrice() }}</span></h1>
+                    <div class="row">
+                        <div class="col-xs-8 text-left">
+                            <h1>{{ $item->title }}</h1>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <h2><span class="label label-default">{{ $item->formattedPrice() }}</span></h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     @include('items.photos', ['item' => $item])
@@ -39,14 +46,20 @@
                 </div>
             </div>
 
-            <!-- <div class="panel panel-default">
+            @if (!empty($related))
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3>Related Items</h3>
                 </div>
                 <div class="panel-body">
-                    // TODO
+                    <div class="row">
+                    @foreach ($related as $ritem)
+                        @include('items._itemsm', ['item' => $ritem])
+                    @endforeach
+                    </div>
                 </div>
-            </div> -->
+            </div>
+            @endif
 
         </div>
     </div>

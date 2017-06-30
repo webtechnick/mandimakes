@@ -45,6 +45,7 @@ class ItemsController extends Controller
      */
     public function show(Item $item)
     {
-        return view('items.show', compact('item'));
+        $related = $item->related();
+        return view('items.show', compact('item','related'));
     }
 }
