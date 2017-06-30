@@ -274,7 +274,7 @@ class Item extends Model
      * @param  int $count [description]
      * @return collection of related items
      */
-    public function related($count = 3)
+    public function related($count = 6)
     {
         return self::byInputTags($this->tagSlugString)
                    ->where('id', '<>', $this->id)
