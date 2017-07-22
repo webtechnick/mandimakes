@@ -34,7 +34,7 @@
                             });
                         },
                         paramName: 'photo',
-                        maxFileSize: 3,
+                        maxFileSize: 6,
                         acceptedFiles: '.jpg, .jpeg, .png, .gif'
                     }
                 </script>
