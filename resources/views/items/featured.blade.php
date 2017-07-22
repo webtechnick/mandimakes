@@ -21,7 +21,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="text-center">
-                    <a href="{{ route('items') }}"><img src="/images/logo-lg.jpg" class="img-rounded"></a>
+                    <a href="{{ route('items') }}"><img src="/images/logo-lg.jpg" class="img-responsive img-rounded"></a>
                 </div>
 
                 <div class="jumbotron">
@@ -49,7 +49,14 @@
         autoplay: true,
         autoplaySpeed: 2500,
         arrows: true,
-        dots: true
+        dots: true,
+        responsive: [{
+            breakpoint: 500,
+            settings: {
+                slidesToShow: 1,
+                infinite: true
+            }
+        }]
     });
     </script>
 @endsection

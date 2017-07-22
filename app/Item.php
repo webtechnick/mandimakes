@@ -277,7 +277,7 @@ class Item extends Model
     public function related($count = 6)
     {
         return self::byInputTags($this->tagSlugString)
-                   ->where('id', '<>', $this->id)
+                   ->where('id', '!=', $this->id)
                    ->inRandomOrder()
                    ->limit($count)
                    ->get();
