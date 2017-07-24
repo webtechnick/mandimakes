@@ -77,8 +77,8 @@ Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
 Route::get('/tags', 'TagsController@index')->name('tags.index');
 
 // Newsletter
-Route::match(['post','get'], '/newsletters/subscribe/{email?}', 'NewsletterController@subscribe')->name('newsletter.subscribe');
-Route::match(['post','get'], '/newsletters/unsubscribe/{email?}', 'NewsletterController@unsubscribe')->name('newsletter.unsubscribe');
+Route::match(['post','get'], '/newsletters/subscribe/{email?}', 'NewsletterController@subscribe')->name('newsletters.subscribe');
+Route::match(['post','get'], '/newsletters/unsubscribe/{email?}', 'NewsletterController@unsubscribe')->name('newsletters.unsubscribe');
 
 // Users
 Auth::routes();

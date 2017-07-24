@@ -113,13 +113,13 @@ protected $fillable = [
      * Future itterations should cache this result
      * @return collection of tags
      */
-    public static function allForNav()
+    public static function allForNav($limit = 12)
     {
-        return Cache::remember('tags_nav', 60, function () {
+        return Cache::remember("tags_nav_$limit", 60, function () use ($limit) {
             return self::select(['name','slug'])
                     ->where('is_nav', true)
                     ->orderBy('name', 'asc')
-                    ->limit(20)
+                    ->limit($limit)
                     ->get();
         });
     }
