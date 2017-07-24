@@ -92,6 +92,16 @@ class Photo extends Model
     }
 
     /**
+     * Scope for non primary photos
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeNonPrimary($query)
+    {
+        return $query->where('is_primary', 0);
+    }
+
+    /**
      * Check if photo is the primary photo
      * @return boolean [description]
      */
