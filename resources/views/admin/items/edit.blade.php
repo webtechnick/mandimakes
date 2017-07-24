@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('actions')
+    <li><a href="/admin/items/delete/{{ $item->id }}" class="confirm" confirm-message="Are you sure you want to delete this item?"><span class="glyphicon glyphicon-trash"></span> Delete Item</a></li>
+@endsection
+
 @section('panel')
     <div class="panel panel-default">
         <div class="panel-heading">
