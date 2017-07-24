@@ -67,6 +67,9 @@ Route::group([
     Route::get('/shippings/edit/{shipping}', 'AdminShippingsController@edit')->name('shippings.edit');
     Route::patch('/shippings/edit/{shipping}', 'AdminShippingsController@update')->name('shippings.update');
     Route::get('/shippings/delete/{shipping}', 'AdminShippingsController@destroy')->name('shippings.delete');
+
+    // Utils
+    Route::get('/clear_cache', 'AdminUtilsController@clear_cache')->name('clear_cache');
 });
 
 // Items
