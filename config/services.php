@@ -17,6 +17,7 @@ return [
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
+        'newsletter' => env('MAILGUN_NEWSLETTER', 'newsletter@mandimakes.shop')
     ],
 
     'ses' => [

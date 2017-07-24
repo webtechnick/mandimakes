@@ -46,6 +46,10 @@ Route::group([
     Route::patch('/tags/edit/{tag}', 'AdminTagsController@update')->name('tags.update');
     Route::get('/tags/delete/{tag}', 'AdminTagsController@destroy')->name('tags.delete');
 
+    // Newsletter
+    Route::get('/newsletters', 'AdminNewsletterController@create')->name('newsletters.create');
+    Route::post('/newsletters', 'AdminNewsletterController@send')->name('newsletters.send');
+
     // Users
     Route::get('/users', 'AdminUsersController@index')->name('users');
     Route::post('/users', 'AdminUsersController@store')->name('users.store');
@@ -71,6 +75,10 @@ Route::get('/item/{item}', 'ItemsController@show')->name('items.show');
 
 // Tags
 Route::get('/tags', 'TagsController@index')->name('tags.index');
+
+// Newsletter
+Route::match(['post','get'], '/newsletters/subscribe/{email?}', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+Route::match(['post','get'], '/newsletters/unsubscribe/{email?}', 'NewsletterController@unsubscribe')->name('newsletter.unsubscribe');
 
 // Users
 Auth::routes();

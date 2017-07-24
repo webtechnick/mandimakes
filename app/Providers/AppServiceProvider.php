@@ -32,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('mms', function($app) {
             return new \App\Libs\MMS();
         });
+
+        $this->app->bind('mailgun', function($app) {
+            return new \Mailgun\Mailgun(config('services.mailgun.secret'));
+        });
     }
 }

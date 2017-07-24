@@ -96,4 +96,18 @@ abstract class TestCase extends BaseTestCase
     {
         return $this->signIn($this->create('App\User', ['group' => 'admin']));
     }
+
+    /**
+     * Mock a class
+     * @param  [type] $class [description]
+     * @param  [type] $key   [description]
+     * @return [type]        [description]
+     */
+    public function mock($class, $key = null)
+    {
+        $key = $key ?: $class;
+        $mock = \Mockery::mock($class);
+        app()->instance($key, $mock);
+        return $mock;
+    }
 }
