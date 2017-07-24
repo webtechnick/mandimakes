@@ -13,6 +13,42 @@ class TagTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
+    public function it_will_return_featured()
+    {
+        $tag = $this->create(Tag::class, ['is_featured' => true]);
+
+        $result = Tag::featured();
+
+        $this->assertEquals($tag->name, $result->name);
+    }
+
+    /** @test */
+    public function it_can_be_featured()
+    {
+        $tag = $this->create(Tag::class);
+
+        $this->assertFalse(!!$tag->is_featured);
+
+        $tag->setFeatured();
+
+        $this->assertTrue($tag->fresh()->is_featured);
+    }
+
+    /** @test */
+    public function only_one_can_be_featured()
+    {
+        $tag = $this->create(Tag::class, ['is_featured' => true]);
+        $tag2 = $this->create(Tag::class, ['is_featured' => false]);
+
+        $this->assertTrue($tag->is_featured);
+
+        $tag2->setFeatured();
+
+        $this->assertFalse(!!$tag->fresh()->is_featured);
+        $this->assertTrue($tag2->fresh()->is_featured);
+    }
+
+    /** @test */
     public function it_should_remove_associations_when_deleted()
     {
         $item = $this->create(Item::class);

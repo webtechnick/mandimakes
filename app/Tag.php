@@ -19,6 +19,7 @@ protected $fillable = [
 
     protected $casts = [
         'is_nav' => 'boolean',
+        'is_featured' => 'boolean',
     ];
 
     protected $events = [
@@ -122,6 +123,59 @@ protected $fillable = [
                     ->limit($limit)
                     ->get();
         });
+    }
+
+    /**
+     * Toggle Nav boolean
+     * @return [type] [description]
+     */
+    public function toggleNav()
+    {
+        if ($this->is_nav) {
+            $this->is_nav = false;
+        } else {
+            $this->is_nav = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the featured tag, or new tag.
+     * @return Tag
+     */
+    public static function featured()
+    {
+        if ($featured = self::where('is_featured', true)->first()) {
+            return $featured;
+        }
+        return self::findBySlugOrName('new');
+    }
+
+    /**
+     * Set this tag to featured
+     */
+    public function setFeatured()
+    {
+        // Update all featured to 0;
+        self::where('is_featured', true)
+            ->update(['is_featured' => false]);
+        // Set this tag to featured.
+        $this->is_featured = true;
+
+        return $this->save();
+    }
+
+    /**
+     * [navClass description]
+     * @return [type] [description]
+     */
+    public function navClass()
+    {
+        if ($this->is_featured) {
+            return 'danger';
+        }
+        return $this->is_nav ? 'success' : '';
     }
 
     /**

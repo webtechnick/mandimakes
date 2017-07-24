@@ -90,4 +90,25 @@ class AdminTagsController extends Controller
         $this->goodFlash('Tag deleted.');
         return redirect()->route('admin.tags');
     }
+
+    /**
+     * Toggle the tag
+     * @param  Tag    $tag [description]
+     * @return [type]      [description]
+     */
+    public function toggle_nav(Tag $tag)
+    {
+        $tag->toggleNav()->save();
+
+        $this->goodFlash('Tag toggled.');
+        return back();
+    }
+
+    public function set_featured(Tag $tag)
+    {
+        $tag->setFeatured();
+
+        $this->goodFlash($tag->name . ' is now featured');
+        return back();
+    }
 }

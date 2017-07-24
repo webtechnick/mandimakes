@@ -36,8 +36,8 @@
                         </li>
                     </ul>
                     <ul class="social">
-                        <li> <a href="https://www.facebook.com/MandiMakesShop"> <i class="fa fa-facebook">   </i> </a> </li>
-                        <li> <a href="mailto://mandi@mandimakes.shop"> <i class="fa fa-envelope">   </i> </a> </li>
+                        <li> <a href="https://www.facebook.com/MandiMakesShop" target="_blank"> <i class="fa fa-facebook">   </i> </a> </li>
+                        <li> <a href="mailto:mandi@mandimakes.shop"> <i class="fa fa-envelope">   </i> </a> </li>
                         <!-- <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li> -->
                         <!-- <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li> -->
                         <!-- <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li> -->

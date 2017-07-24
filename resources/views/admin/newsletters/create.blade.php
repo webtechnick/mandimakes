@@ -4,7 +4,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1>Send Newseltter/Announcement</h1>
+            <h1>Send Newsletter/Announcement</h1>
         </div>
 
         @include('layouts.errors')

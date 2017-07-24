@@ -327,7 +327,7 @@ class Item extends Model
      */
     public function scopeFeatured($query)
     {
-        $featured = config('app.featured') ?: 'new'; // TODO, customizable using Settings
+        $featured = Tag::featured()->slug;
         return $query->byInputTags($featured, true);
     }
 }

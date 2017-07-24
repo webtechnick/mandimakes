@@ -45,6 +45,8 @@ Route::group([
     Route::get('/tags/edit/{tag}', 'AdminTagsController@edit')->name('tags.edit');
     Route::patch('/tags/edit/{tag}', 'AdminTagsController@update')->name('tags.update');
     Route::get('/tags/delete/{tag}', 'AdminTagsController@destroy')->name('tags.delete');
+    Route::get('/tags/toggle/{tag}', 'AdminTagsController@toggle_nav')->name('tags.toggle');
+    Route::get('/tags/featured/{tag}', 'AdminTagsController@set_featured')->name('tags.featured');
 
     // Newsletter
     Route::get('/newsletters', 'AdminNewsletterController@create')->name('newsletters.create');

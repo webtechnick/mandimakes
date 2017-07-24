@@ -32,7 +32,7 @@
                     <th class="text-right">Actions</th>
                 </tr>
             @foreach($tags as $tag)
-                <tr>
+                <tr class="{{ $tag->navClass() }}">
                     <td class="hidden-sm hidden-xs text-center">{{ $tag->id }}</td>
                     <td class="text-left">{{ $tag->name }}</td>
                     <td class="text-left hidden-sm hidden-xs ">{{ $tag->slug }}</td>
@@ -44,6 +44,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
+                                <li><a href="{{ route('admin.tags.toggle', [$tag]) }}">Toggle Nav</a></li>
+                                <li><a href="{{ route('admin.tags.featured', [$tag]) }}">Set Featured</a></li>
                                 <li><a href="{{ route('admin.tags.delete', [$tag]) }}" class="confirm" confirm-message="Are you sure you want to delete this tag?">Delete</a></li>
                             </ul>
                         </div>
@@ -51,6 +53,10 @@
                 </tr>
             @endforeach
             </table>
+
+            <span class="label label-danger">Featured Tag</span>
+            <span class="label label-success">Nav Tag</span>
+            <span class="label label-default">Normal Tag</span>
         </div>
     </div>
 
