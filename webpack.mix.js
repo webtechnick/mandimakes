@@ -29,3 +29,7 @@ mix.copy('node_modules/lightbox2/dist/images/', 'public/images');
 mix.copy('node_modules/tinymce/plugins', 'public/js/plugins');
 mix.copy('node_modules/tinymce/skins', 'public/js/skins');
 mix.copy('node_modules/tinymce/themes', 'public/js/themes');
+
+// mix.minify('public/js/app.js');
+// mix.minify('public/js/libs.js');
+// mix.minify('public/css/libs.css');
