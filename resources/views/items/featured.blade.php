@@ -18,6 +18,8 @@
             </div>
         </div>
 
+        @include('posts._postth')
+
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="text-center">

@@ -4,6 +4,7 @@ namespace App;
 
 use App\CartItem;
 use App\Order;
+use App\Post;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,6 +46,15 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * A user has many posts.
+     * @return [type] [description]
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
     /**

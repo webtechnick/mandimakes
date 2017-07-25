@@ -17,11 +17,13 @@ class AddUserToView
     public function handle($request, Closure $next)
     {
         $user = null;
+        $isAdmin = false;
         if (Auth::check()) {
             $user = Auth::user();
+            $isAdmin = Auth::user()->isAdmin();
         }
 
-        view()->share('user', $user);
+        view()->share(compact('isAdmin', 'user'));
 
         return $next($request);
     }

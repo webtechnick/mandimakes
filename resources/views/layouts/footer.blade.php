@@ -19,6 +19,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 hidden-xs">
                     <h3> Info </h3>
                     <ul>
+                        <li> <a href="/blog"> Blog </a> </li>
                         <li> <a href="/about"> About Us </a> </li>
                         <li> <a href="https://www.facebook.com/messages/t/MandiMakesShop" target="_blank" class="confirm" confirm-message="Message us on Facebook">Commission Request <i class="fa fa-external-link" aria-hidden="true"></i></a> </li>
                     </ul>

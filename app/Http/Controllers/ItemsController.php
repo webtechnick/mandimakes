@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Cart;
 use App\Item;
+use App\Post;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -15,7 +16,8 @@ class ItemsController extends Controller
     public function featured()
     {
         $items = Item::featured()->get();
-        return view('items.featured', compact('items'));
+        $post = Post::mostRecent();
+        return view('items.featured', compact('items', 'post'));
     }
     /**
      * Display a listing of the resource.

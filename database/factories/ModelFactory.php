@@ -118,3 +118,17 @@ $factory->define(\App\Photo::class, function (Faker\Generator $faker) {
         'path' => 'uploads/photos/' . $name,
     ];
 });
+
+$factory->define(\App\Post::class, function (Faker\Generator $faker) {
+    $text = implode("\n\n",$faker->paragraphs(2));
+    $title = $faker->sentence;
+    return [
+        'user_id' => 1,
+        'title' => $title,
+        'slug' => str_slug($title),
+        'body' => $text,
+        'short_body' => str_limit($text, 200),
+        'is_published' => 0,
+        'published_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
+    ];
+});
