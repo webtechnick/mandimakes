@@ -11239,7 +11239,8 @@ window.Vue = __webpack_require__(38);
 
 tinymce.init({
   selector: '.tinymce',
-  themes: "modern"
+  themes: "modern",
+  plugins: ["link", "code", "image", "media"]
 });
 
 /**

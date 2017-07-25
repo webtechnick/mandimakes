@@ -20,6 +20,7 @@ window.Vue = require('vue');
 tinymce.init({
     selector:'.tinymce',
     themes: "modern",
+    plugins: ["link","code","image","media"]
 });
 
 /**
