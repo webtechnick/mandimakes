@@ -9,7 +9,9 @@
 
         @include('layouts.flashes')
 
-        @yield('content')
+        <div id="main">
+            @yield('content')
+        </div>
     </div>
 
     @include('layouts.footer')

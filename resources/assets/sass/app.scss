@@ -14,8 +14,9 @@
 // Footer
 @import "components/_footer";
 
-#app {
-    min-height: 650px;
+#main {
+    // min-height: 500px;
+    margin-bottom: 100px;
 }
 .navbar-brand {
     padding: 5px 15px;
