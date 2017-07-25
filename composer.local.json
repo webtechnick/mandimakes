@@ -60,5 +60,14 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/laravel-glow",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }

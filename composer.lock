@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "57259e0b25bc0f6b4d10953e8416f740",
+    "content-hash": "056cfec877ea982b447fc8abc3d276c8",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -3492,13 +3492,19 @@
         {
             "name": "webtechnick/laravel-glow",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webtechnick/laravel-glow.git",
+                "reference": "94f6fe9a7ab7f526db8c6a8cc11b5b08aa16dc09"
+            },
             "dist": {
-                "type": "path",
-                "url": "../../packages/laravel-glow",
-                "reference": "0d86d6259d99a443509e9f872cf700708b06d1e2",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/webtechnick/laravel-glow/zipball/94f6fe9a7ab7f526db8c6a8cc11b5b08aa16dc09",
+                "reference": "94f6fe9a7ab7f526db8c6a8cc11b5b08aa16dc09",
+                "shasum": ""
             },
             "require": {
+                "intervention/image": "^2.3",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -3511,11 +3517,7 @@
                     "WebTechNick\\LaravelGlow\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3526,9 +3528,7 @@
                 }
             ],
             "description": "an army knife of tools for laravel",
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2017-07-25T02:24:26+00:00"
         }
     ],
     "packages-dev": [
