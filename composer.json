@@ -15,7 +15,8 @@
         "laravelcollective/html": "^5.4.0",
         "mailgun/mailgun-php": "^2.3",
         "php-http/guzzle6-adapter": "^1.1",
-        "stripe/stripe-php": "^4.9"
+        "stripe/stripe-php": "^4.9",
+        "webtechnick/laravel-glow": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^2.3",
@@ -59,5 +60,14 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/laravel-glow",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }
