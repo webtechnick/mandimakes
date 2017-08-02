@@ -104,6 +104,19 @@ trait Taggable
     }
 
     /**
+     * Determine if we have the tag
+     * @param  Tag    $tag [description]
+     * @return [type]      [description]
+     */
+    public function hasTag($tag)
+    {
+        if ($tag instanceof Tag) {
+            $tag = $tag->slug;
+        }
+        return $this->tags()->byName($tag)->exists();
+    }
+
+    /**
      * Takes in a tags CSV string of slugs
      * @param  [type] $query [description]
      * @param  [type] $tags  [description]

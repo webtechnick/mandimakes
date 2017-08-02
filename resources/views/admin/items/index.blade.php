@@ -49,9 +49,7 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="/admin/items/{{ $item->id }}/photos">Manage Photos</a></li>
-                                <li><a href="/admin/items/duplicate/{{ $item->id }}">Duplicate</a></li>
-                                <li><a href="/admin/items/{{ $item->id }}/orders">View Orders</a></li>
+                                <li><a href="{{ route('admin.items.toggle_new', $item) }}">Toggle New</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/admin/items/delete/{{ $item->id }}" class="confirm" confirm-message="Are you sure you want to delete this item?">Delete</a></li>
                             </ul>

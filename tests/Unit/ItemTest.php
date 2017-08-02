@@ -241,4 +241,21 @@ class ItemTest extends TestCase
 
         $this->assertEquals(0, $item->qty);
     }
+
+    /** @test */
+    public function it_can_be_marked_as_new_with_toggle()
+    {
+        $item = $this->create('App\Item');
+        $tag = $this->create('App\Tag', ['name' => 'New', 'slug' => 'new']);
+
+        $this->assertFalse($item->isNew());
+
+        $item->toggleNew();
+
+        $this->assertTrue($item->isNew());
+
+        $item->toggleNew();
+
+        $this->assertFalse($item->isNew());
+    }
 }

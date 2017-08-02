@@ -132,6 +132,30 @@ class Item extends Model
     }
 
     /**
+     * Does the item have the new tag associated to it?
+     * @return boolean [description]
+     */
+    public function isNew()
+    {
+        return $this->hasTag('new');
+    }
+
+    /**
+     * Toggles the new tag on the item.
+     * @return [type] [description]
+     */
+    public function toggleNew()
+    {
+        $new = Tag::findBySlugOrName('new');
+        if ($this->isNew()) {
+            $this->removeTag($new);
+        } else {
+            $this->addTag($new);
+        }
+        return $this;
+    }
+
+    /**
      * Boolean if item is instock
      * @return [type] [description]
      */

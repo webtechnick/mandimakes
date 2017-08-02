@@ -19,6 +19,8 @@ Route::group([
     Route::get('/items/edit/{item}', 'AdminItemsController@edit')->name('items.edit');
     Route::patch('/items/edit/{item}', 'AdminItemsController@update')->name('items.update');
     Route::get('/items/delete/{item}', 'AdminItemsController@destroy')->name('items.delete');
+    Route::get('/items/toggle_new/{item}', 'AdminItemsController@toggle_new')->name('items.toggle_new');
+    Route::get('/items/clear_new', 'AdminItemsController@clear_new')->name('items.clear_new');
 
     // Posts
     Route::get('/posts', 'AdminPostsController@index')->name('posts');

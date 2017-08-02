@@ -89,4 +89,17 @@ class TagTest extends TestCase
         // The only tag for $item2 is now $tag
         $this->assertEquals($item2->tags()->first()->id, $tag->id);
     }
+
+    /** @test */
+    public function it_should_know_if_it_has_a_tag()
+    {
+        $item = $this->create('App\Item');
+        $tag = $this->create('App\Tag');
+        $tag2 = $this->create('App\Tag');
+
+        $item->addTag($tag);
+
+        $this->assertTrue($item->hasTag($tag));
+        $this->assertFalse($item->hasTag($tag2));
+    }
 }

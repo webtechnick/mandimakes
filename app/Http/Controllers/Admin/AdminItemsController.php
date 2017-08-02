@@ -78,11 +78,34 @@ class AdminItemsController extends Controller
         return redirect()->route('admin.items');
     }
 
+    /**
+     * Clear the new from all items.
+     * @return [type] [description]
+     */
     public function clear_new()
     {
         Item::clearNew();
         $this->goodFlash('New Items Cleared');
-        back();
+        return back();
+    }
+
+    /**
+     * Toggle the item new status
+     * @param  Item   $item [description]
+     * @return [type]       [description]
+     */
+    public function toggle_new(Item $item)
+    {
+        $item->toggleNew();
+
+        if ($item->isNew()) {
+            $message = 'Item is now marked as new.';
+        } else {
+            $message = 'Item is no longer marked as new.';
+        }
+        $this->goodFlash($message);
+
+        return back();
     }
 
     /**
