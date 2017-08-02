@@ -30,6 +30,7 @@
                     <th class="text-center">Picture</th>
                     <th class="hidden-sm hidden-xs text-left">Description</th>
                     <th class="text-center">Qty</th>
+                    <th class="text-center">Cart</th>
                     <th class="text-center">Price</th>
                     <th class="text-right">Actions</th>
                 </tr>
@@ -38,6 +39,7 @@
                     <td class="text-center">{!! $item->pic('50'); !!} <br> {{ $item->statusNice() }}</td>
                     <td class="hidden-sm hidden-xs text-left">{{ $item->short_description }}</td>
                     <td class="text-center">{{ $item->qty }}</td>
+                    <td class="text-center">{{ $item->cart_count }}</td>
                     <td class="text-center">{{ $item->formattedPrice() }}</td>
                     <td class="col-md-2 text-right">
                         <div class="btn-group">
