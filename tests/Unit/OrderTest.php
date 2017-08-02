@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Facades\Cart;
+use App\Item;
 use App\Order;
 use App\Sale;
 use App\User;
@@ -86,5 +87,25 @@ class OrderTest extends TestCase
         $this->assertEquals(2, Sale::count());
         $this->assertEquals(30, $order->total_dollars);
         $this->assertTrue($order->fresh()->isNew());
+    }
+
+    /** @test */
+    public function it_should_add_item_back_to_stock_when_ordering_it()
+    {
+        $this->buildCart();
+
+        $item = Item::first(); // Get first created item from cart built
+        $this->assertEquals(1, $item->qty);
+
+        $order = Order::createFromStripe($this->stripeData());
+
+        $this->assertEquals(0, $item->fresh()->qty);
+        $this->assertCount(2, $order->sales);
+
+        $order->delete();
+
+        $this->assertEquals(0, Sale::count());
+
+        $this->assertEquals(1, $item->fresh()->qty);
     }
 }

@@ -22,6 +22,10 @@ class Order extends Model
 
     protected $with = ['sales'];
 
+    protected $events = [
+        'deleting' => OrderDeleting::class
+    ];
+
     protected static $statuses = [
         0 => 'pending',
         1 => 'success',

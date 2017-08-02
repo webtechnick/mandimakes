@@ -28,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SaleDeleting' => [
             'App\Listeners\IncreaseItemStock',
         ],
+        'App\Events\OrderDeleting' => [
+            'App\Listeners\DeleteRelatedSales',
+        ],
         'App\Events\TagDeleting' => [
             'App\Listeners\RemoveTagFromItems',
         ],
