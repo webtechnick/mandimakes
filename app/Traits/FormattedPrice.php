@@ -13,7 +13,7 @@ trait FormattedPrice
         if ($this->price() == 0) {
             return 'Free';
         }
-        return sprintf('$&nbsp;%s', number_format($this->price(), 2));
+        return sprintf('$ %s', number_format($this->price(), 2));
     }
 
     /**
