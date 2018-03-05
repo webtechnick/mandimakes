@@ -33,7 +33,7 @@
                         <li><a href="/tags">... More ...</a></li>
                     </ul>
                 </li>
-                {{-- <li><a href="/blog">Articles</a></li> --}}
+                <li><a href="/blog">Articles</a></li>
                 <li class="hidden-md hidden-sm"><a href="/about">About Us</a></li>
             </ul>
 
