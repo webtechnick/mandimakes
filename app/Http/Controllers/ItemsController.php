@@ -15,6 +15,8 @@ class ItemsController extends Controller
      */
     public function featured()
     {
+        return redirect()->route('items');
+
         $items = Item::featured()->get();
         $post = Post::mostRecent();
         return view('items.featured', compact('items', 'post'));

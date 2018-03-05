@@ -16,10 +16,22 @@ trait Thumbnailable
     public function thumbnail($size = null)
     {
         $size = $this->getSize($size);
+        if ($this->isExternalPath()) {
+            return $this->path;
+        }
         if (!$this->thumbnailExists($size)) {
             $this->createThumbnail($size);
         }
         return Storage::disk(config('thumbnail.disk'))->url($this->thumbnailFileName($size));
+    }
+
+    /**
+     * Allow for external path
+     * @return boolean [description]
+     */
+    public function isExternalPath()
+    {
+        return false;
     }
 
     /**
